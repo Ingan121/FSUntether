@@ -24,7 +24,7 @@ ldid -K../misc/dev_certificate.p12 TestFlightServices
 5. Compress the Payload folder then change the extension to .ipa
 6. Install it with TrollStore
 7. Disable USB restricted mode, connect your phone to Mac, then reboot the device 
-8. Run `iproxy 1337 1337` and `nc localhost 1337` in separate terminals
+8. Run `iproxy 1338 1338` and `nc localhost 1338` in separate terminals
 * TestFlight app will crash on launch, but the untether will work fine.
 * FSUntetherGUI is WIP.
 * iDownload is sandboxed, and unfortunately the sandbox entitlements seem to be ignored in app extensions. But I think this is enough for a kernel exploit to run.
