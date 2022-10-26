@@ -34,6 +34,13 @@ ldid -K../misc/dev_certificate.p12 TestFlightServices
 * `TestFlightServiceExtension` of `TestFlight.app` automatically starts on boot, even before first unlock. That's all `¯\_(ツ)_/¯`
 * How did I find this? Just ran sysdiagnose BFU and found this was the only process in `/var` that is started before first unlock.
 * Getting arbitrary code execution was a bit hard though. Directly replacing `TestFlightServiceExtension` with permasigned binaries didn't seem to work, so I had to modify the library it loads.
+
+## Todo
+* Get the original TestFlight functionality working
+* Or get FSU working after changing the bundle ID (it doesn't currently)
+* Find out how to build an executable that can directly modify `TestFlightServiceExtension`
+* Integrate with Fugu15 once it releases
+
 ## Credits
 [@LinusHenze](https://github.com/LinusHenze) for iDownload from Fugu14 and the CoreTrust exploit<br>
 [@opa334](https://github.com/opa334) for TrollStore
