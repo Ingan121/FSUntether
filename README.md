@@ -19,6 +19,7 @@ clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -dynamiclib -o TestFli
 ldid -K../misc/dev_certificate.p12 TestFlightServices
 ```
 * Xcode SDKs should work, too.
+* You must use [Procursus ldid](https://github.com/permasigner/ldid), not brew ldid.
 4. Replace `Payload/TestFlight.app/Frameworks/TestFlightServices.framework/TestFlightServices` with the built library
 5. Compress the Payload folder then change the extension to .ipa
 6. Install it with TrollStore
