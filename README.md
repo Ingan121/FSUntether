@@ -4,7 +4,7 @@
   / /_   \__ \/ / / / __ \/ __/ _ \/ __/ __ \/ _ \/ ___/
  / __/  ___/ / /_/ / / / / /_/  __/ /_/ / / /  __/ /    
 /_/    /____/\____/_/ /_/\__/\___/\__/_/ /_/\___/_/        
-  Fucking Simple Untether for iOS 15 by Ingan121
+   Simple Untether for iOS 15 by Ingan121
 ```
 
 # Compatibility is not guaranteed, USE AT YOUR OWN RISK!
