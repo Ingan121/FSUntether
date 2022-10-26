@@ -26,3 +26,7 @@ ldid -K../misc/dev_certificate.p12 TestFlightServices
 * TestFlight app will crash on launch, but the untether will work fine.
 * FSUntetherGUI is WIP
 * iDownload is sandboxed, and unfortunately the sandbox entitlements seem to be ignored in app extensions. But I think this is enough for a kernel exploit to run.
+
+## Credits
+[@LinusHenze](https://github.com/LinusHenze) for iDownload from Fugu14 and the CoreTrust exploit<br>
+[@opa334](https://github.com/opa334) for TrollStore
