@@ -4,9 +4,9 @@
   / /_   \__ \/ / / / __ \/ __/ _ \/ __/ __ \/ _ \/ ___/
  / __/  ___/ / /_/ / / / / /_/  __/ /_/ / / /  __/ /    
 /_/    /____/\____/_/ /_/\__/\___/\__/_/ /_/\___/_/        
-   Simple Untether for iOS 15 by Ingan121
+                    by Ingan121
 ```
-
+*__Fucking Simple Untether PoC for iOS 15__*
 # Compatibility is not guaranteed, USE AT YOUR OWN RISK!
 
 ## Building
