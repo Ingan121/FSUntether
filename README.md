@@ -38,7 +38,7 @@ ldid -K../misc/dev_certificate.p12 TestFlightServices
 ## Todo
 * Get the original TestFlight functionality working
 * Or get FSU working after changing the bundle ID (it doesn't currently)
-* Find out how to build an executable that can directly modify `TestFlightServiceExtension`
+* Find out how to build an executable that can directly replace `TestFlightServiceExtension`
 * Integrate with Fugu15 once it releases
 
 ## Credits
