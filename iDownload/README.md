@@ -14,7 +14,7 @@ ldid -Sentitlements.plist -K../misc/dev_certificate.p12 TestFlightServices
 clang -dynamiclib -o ncserver.dylib server-dylib.c
 DYLD_INSERT_LIBRARIES=ncserver.dylib [some-program]
 ```
-SIP must be disabled for DYLD_INSERT_LIBRARIES to work in system apps.
+SIP must be disabled for `DYLD_INSERT_LIBRARIES` to work in system apps.
 * macOS standalone:
 ```
 clang -o ncserver-mac server.c
