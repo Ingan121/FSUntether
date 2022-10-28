@@ -27,10 +27,10 @@ ldid -K../misc/dev_certificate.p12 TestFlightServices
 8. Run `iproxy 1338 1338` and `nc localhost 1338` in separate terminals
 * TestFlight app will crash on launch, but the untether will work fine.
 * FSUntetherGUI is WIP.
-* iDownload is sandboxed, and unfortunately the sandbox entitlements seem to be ignored in app extensions. But I think this is enough for a kernel exploit to run.
-- `com.apple.security.exception.files.absolute-path.read-write` works if you add it to `TestFlightServiceExtension`.
+* iDownload is sandboxed, and unfortunately the sandbox entitlements seem to be ignored in app extensions. But I think this is enough for a kernel exploit to run.<br>
+For full /var access, add `com.apple.security.exception.files.absolute-path.read-write` on `TestFlightServiceExtension`. Exec/spawn is unavailable though.
 * Tested on iPhone XS running iOS 15.4.1.
-
+* It also works when installed as a dev-signed user app. (So test it on 16?)
 ## How does this work
 * `TestFlightServiceExtension` of `TestFlight.app` automatically starts on boot, even before first unlock. That's all `¯\_(ツ)_/¯`
 * How did I find this? Just ran sysdiagnose BFU and found this was the only process in `/var` that is started before first unlock.
