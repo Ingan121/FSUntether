@@ -21,12 +21,16 @@
 #include <sys/stat.h>
 #include <arpa/inet.h>
 #include <spawn.h>
+#include <CoreFoundation/CoreFoundation.h>
 
 #define VERSION       "1.0"
 
 #define FILE_EXISTS(file) (access(file, F_OK ) != -1)
 
 extern char **environ;
+
+int SBSLaunchApplicationWithIdentifier(CFStringRef id, char flags);
+bool SBSOpenSensitiveURLAndUnlock(CFURLRef url, char flags);
 
 int runCommand(FILE *f, char *argv[]) {
     pid_t pid;
@@ -105,6 +109,16 @@ char *getParameter(char *buf, int param) {
     return data;
 }
 
+// https://www.w3schools.blog/check-if-string-is-number-c
+int isNumber(char s[]) {
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (isdigit(s[i]) == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 /*
  * https://stackoverflow.com/questions/10323060/printing-file-permissions-like-ls-l-using-stat2-in-c
  */
@@ -176,6 +190,8 @@ void printHelp(FILE *f) {
     fprintf(f, "info <file>:              Print file infos\r\n");
     fprintf(f, "mkdir <name>:             Create a directory\r\n");
     fprintf(f, "exec <program> <args>:    Launch a program\r\n");
+    fprintf(f, "open <bundleid> <flags>:  Launch a app\r\n");
+    fprintf(f, "openurl <url>:            Launch a URL scheme\r\n");
     fprintf(f, "help:                     Print this help\r\n");
     fprintf(f, "\r\n");
 }
@@ -504,6 +520,48 @@ void handleConnection(int socket) {
             } else {
                 fprintf(f, "Usage: exec <program> <args>\r\n");
             }
+        } else if (strcmp(cmd, "open") == 0) {
+            // https://github.com/comex/sbsutils/blob/master/sblaunch.c
+            char *bundleid = getParameter(cmdBuffer, 1);
+            if (bundleid) {
+                char *bg = getParameter(cmdBuffer, 2);
+                if (bg) {
+                    int flags = 0;
+                    if (strcmp(bg, "true") == 0) {
+                        flags = 1;
+                    }
+                    CFStringRef cs = CFStringCreateWithCString(NULL, bundleid, kCFStringEncodingUTF8);
+                    int err;
+                    //fprintf(f, "%s %i\r\n", bundleid, flags);
+                    if (err = SBSLaunchApplicationWithIdentifier(cs, flags)) {
+                        fprintf(stderr, "SBSLaunchApplicationWithIdentifier failed: %d\n", err);
+                    }
+  
+                    free(bg);
+                } else {
+                    fprintf(f, "Usage: open <bundleid> <background (true/false)>\r\n");
+                }
+
+                free(bundleid);
+            } else {
+                fprintf(f, "Usage: open <bundleid> <background (true/false)>\r\n");
+            }
+        } else if (strcmp(cmd, "openurl") == 0) {
+            // https://github.com/comex/sbsutils/blob/master/sbopenurl.c
+            char *url = getParameter(cmdBuffer, 1);
+            if (url) {
+                CFURLRef cu = CFURLCreateWithBytes(NULL, url, strlen(url), kCFStringEncodingUTF8, NULL);
+                if (!cu) {
+                    fprintf(stderr, "Invalid URL\n");
+                }
+                bool ret = SBSOpenSensitiveURLAndUnlock(cu, 1);
+                if (!ret) {
+                    fprintf(f, "SBSOpenSensitiveURLAndUnlock failed\n");
+                }
+                free(url);
+            } else {
+                fprintf(f, "Usage: openurl <url>\r\n");
+            }
         } else {
             fprintf(f, "Unknown command %s!\r\n", cmdBuffer);
         }
@@ -519,6 +577,7 @@ static int dylibMain() {
     dispatch_async(dispatch_queue_create("Server", NULL), ^{
         int server_fd = socket(AF_INET, SOCK_STREAM, 0);
         if (server_fd < 0) {
+            printf("Error!");
             exit(-1);
         }
         
@@ -529,6 +588,7 @@ static int dylibMain() {
         int option = 1;
         
         if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEPORT, &option, sizeof(option)) < 0) {
+            printf("Error!");
             exit(-1);
         }
         
@@ -540,6 +600,7 @@ static int dylibMain() {
         server.sin_port = htons(1338);
         
         if (bind(server_fd, (struct sockaddr*) &server, sizeof(server)) < 0) {
+            printf("Port 1338 already occupied!");
             exit(-1);
         }
         

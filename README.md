@@ -29,6 +29,7 @@ ldid -K../misc/dev_certificate.p12 TestFlightServices
 * FSUntetherGUI is WIP.
 * iDownload is sandboxed, and unfortunately the sandbox entitlements seem to be ignored in app extensions. But I think this is enough for a kernel exploit to run.<br>
 For full /var access, add `com.apple.security.exception.files.absolute-path.read-write` on `TestFlightServiceExtension`. Exec/spawn is unavailable though.
+* Update: found it is possible to launch some apps in BFU with `SBSOpenSensitiveURLAndUnlock`, thus escaping the sandbox. Update coming soon. (Plan: replace the Magnifier app with FSUntetherGUI)
 * Tested on iPhone XS running iOS 15.4.1.
 * It also works when installed as a dev-signed user app. (So test it on 16?)
 ## How does this work

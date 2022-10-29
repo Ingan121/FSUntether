@@ -1,14 +1,15 @@
 # Build instructions
 * iOS dynamic library for FSUntether:
 ```
-clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -dynamiclib -o TestFlightServices server-dylib.c
+clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices server-dylib.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib
 ldid -K../misc/dev_certificate.p12 TestFlightServices
 ```
 * iOS standalone:
 ```
-clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o ncserver server.c
+clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o ncserver2 server.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks
 ldid -Sentitlements.plist -K../misc/dev_certificate.p12 TestFlightServices
 ```
+## macOS is currently not supported
 * macOS dynamic library for testing:
 ```
 clang -dynamiclib -o ncserver.dylib server-dylib.c
