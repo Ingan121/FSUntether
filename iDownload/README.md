@@ -6,7 +6,7 @@ ldid -K../misc/dev_certificate.p12 TestFlightServices
 ```
 * iOS standalone:
 ```
-clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o ncserver2 server.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks
+clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o ncserver server.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks
 ldid -Sentitlements.plist -K../misc/dev_certificate.p12 TestFlightServices
 ```
 ## macOS is currently not supported
