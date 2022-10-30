@@ -7,27 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		557EAE45290854A50049C0E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557EAE44290854A50049C0E1 /* AppDelegate.swift */; };
-		557EAE47290854A50049C0E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557EAE46290854A50049C0E1 /* SceneDelegate.swift */; };
-		557EAE49290854A50049C0E1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557EAE48290854A50049C0E1 /* ContentView.swift */; };
-		557EAE4B290854A70049C0E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 557EAE4A290854A70049C0E1 /* Assets.xcassets */; };
-		557EAE4E290854A70049C0E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 557EAE4D290854A70049C0E1 /* Preview Assets.xcassets */; };
-		557EAE51290854A70049C0E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 557EAE4F290854A70049C0E1 /* LaunchScreen.storyboard */; };
+		5585D0DB290EB74900171750 /* FSUntetherGUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585D0DA290EB74900171750 /* FSUntetherGUIApp.swift */; };
+		5585D0DD290EB74900171750 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585D0DC290EB74900171750 /* ContentView.swift */; };
+		5585D0DF290EB75D00171750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5585D0DE290EB75D00171750 /* Assets.xcassets */; };
+		5585D0E2290EB75D00171750 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5585D0E1290EB75D00171750 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		557EAE41290854A50049C0E1 /* FSUntetherGUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSUntetherGUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		557EAE44290854A50049C0E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		557EAE46290854A50049C0E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		557EAE48290854A50049C0E1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		557EAE4A290854A70049C0E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		557EAE4D290854A70049C0E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		557EAE50290854A70049C0E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		557EAE52290854A70049C0E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5585D0D7290EB74900171750 /* FSUntetherGUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSUntetherGUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5585D0DA290EB74900171750 /* FSUntetherGUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSUntetherGUIApp.swift; sourceTree = "<group>"; };
+		5585D0DC290EB74900171750 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5585D0DE290EB75D00171750 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5585D0E1290EB75D00171750 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5585D0E3290EB75D00171750 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55A9D21D290EC44800BF9AE6 /* PersonaSpawn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonaSpawn.h; sourceTree = "<group>"; };
+		55A9D21E290EC46900BF9AE6 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		557EAE3E290854A50049C0E1 /* Frameworks */ = {
+		5585D0D4290EB74900171750 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,54 +35,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		557EAE38290854A40049C0E1 = {
+		5585D0CE290EB74900171750 = {
 			isa = PBXGroup;
 			children = (
-				557EAE43290854A50049C0E1 /* FSUntetherGUI */,
-				557EAE42290854A50049C0E1 /* Products */,
+				5585D0D9290EB74900171750 /* FSUntetherGUI */,
+				5585D0D8290EB74900171750 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		557EAE42290854A50049C0E1 /* Products */ = {
+		5585D0D8290EB74900171750 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				557EAE41290854A50049C0E1 /* FSUntetherGUI.app */,
+				5585D0D7290EB74900171750 /* FSUntetherGUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		557EAE43290854A50049C0E1 /* FSUntetherGUI */ = {
+		5585D0D9290EB74900171750 /* FSUntetherGUI */ = {
 			isa = PBXGroup;
 			children = (
-				557EAE44290854A50049C0E1 /* AppDelegate.swift */,
-				557EAE46290854A50049C0E1 /* SceneDelegate.swift */,
-				557EAE48290854A50049C0E1 /* ContentView.swift */,
-				557EAE4A290854A70049C0E1 /* Assets.xcassets */,
-				557EAE4F290854A70049C0E1 /* LaunchScreen.storyboard */,
-				557EAE52290854A70049C0E1 /* Info.plist */,
-				557EAE4C290854A70049C0E1 /* Preview Content */,
+				55A9D21C290EC40000BF9AE6 /* PersonaSpawn */,
+				5585D0DA290EB74900171750 /* FSUntetherGUIApp.swift */,
+				5585D0DC290EB74900171750 /* ContentView.swift */,
+				5585D0DE290EB75D00171750 /* Assets.xcassets */,
+				5585D0E3290EB75D00171750 /* Info.plist */,
+				5585D0E0290EB75D00171750 /* Preview Content */,
 			);
 			path = FSUntetherGUI;
 			sourceTree = "<group>";
 		};
-		557EAE4C290854A70049C0E1 /* Preview Content */ = {
+		5585D0E0290EB75D00171750 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				557EAE4D290854A70049C0E1 /* Preview Assets.xcassets */,
+				5585D0E1290EB75D00171750 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		55A9D21C290EC40000BF9AE6 /* PersonaSpawn */ = {
+			isa = PBXGroup;
+			children = (
+				55A9D21E290EC46900BF9AE6 /* module.modulemap */,
+				55A9D21D290EC44800BF9AE6 /* PersonaSpawn.h */,
+			);
+			path = PersonaSpawn;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		557EAE40290854A50049C0E1 /* FSUntetherGUI */ = {
+		5585D0D6290EB74900171750 /* FSUntetherGUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 557EAE55290854A70049C0E1 /* Build configuration list for PBXNativeTarget "FSUntetherGUI" */;
+			buildConfigurationList = 5585D0E6290EB75D00171750 /* Build configuration list for PBXNativeTarget "FSUntetherGUI" */;
 			buildPhases = (
-				557EAE3D290854A50049C0E1 /* Sources */,
-				557EAE3E290854A50049C0E1 /* Frameworks */,
-				557EAE3F290854A50049C0E1 /* Resources */,
+				5585D0D3290EB74900171750 /* Sources */,
+				5585D0D4290EB74900171750 /* Frameworks */,
+				5585D0D5290EB74900171750 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -92,24 +98,24 @@
 			);
 			name = FSUntetherGUI;
 			productName = FSUntetherGUI;
-			productReference = 557EAE41290854A50049C0E1 /* FSUntetherGUI.app */;
+			productReference = 5585D0D7290EB74900171750 /* FSUntetherGUI.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		557EAE39290854A40049C0E1 /* Project object */ = {
+		5585D0CF290EB74900171750 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
-					557EAE40290854A50049C0E1 = {
+					5585D0D6290EB74900171750 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
 				};
 			};
-			buildConfigurationList = 557EAE3C290854A40049C0E1 /* Build configuration list for PBXProject "FSUntetherGUI" */;
+			buildConfigurationList = 5585D0D2290EB74900171750 /* Build configuration list for PBXProject "FSUntetherGUI" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -117,55 +123,42 @@
 				en,
 				Base,
 			);
-			mainGroup = 557EAE38290854A40049C0E1;
-			productRefGroup = 557EAE42290854A50049C0E1 /* Products */;
+			mainGroup = 5585D0CE290EB74900171750;
+			productRefGroup = 5585D0D8290EB74900171750 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				557EAE40290854A50049C0E1 /* FSUntetherGUI */,
+				5585D0D6290EB74900171750 /* FSUntetherGUI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		557EAE3F290854A50049C0E1 /* Resources */ = {
+		5585D0D5290EB74900171750 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				557EAE51290854A70049C0E1 /* LaunchScreen.storyboard in Resources */,
-				557EAE4E290854A70049C0E1 /* Preview Assets.xcassets in Resources */,
-				557EAE4B290854A70049C0E1 /* Assets.xcassets in Resources */,
+				5585D0E2290EB75D00171750 /* Preview Assets.xcassets in Resources */,
+				5585D0DF290EB75D00171750 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		557EAE3D290854A50049C0E1 /* Sources */ = {
+		5585D0D3290EB74900171750 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				557EAE45290854A50049C0E1 /* AppDelegate.swift in Sources */,
-				557EAE47290854A50049C0E1 /* SceneDelegate.swift in Sources */,
-				557EAE49290854A50049C0E1 /* ContentView.swift in Sources */,
+				5585D0DD290EB74900171750 /* ContentView.swift in Sources */,
+				5585D0DB290EB74900171750 /* FSUntetherGUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		557EAE4F290854A70049C0E1 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557EAE50290854A70049C0E1 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		557EAE53290854A70049C0E1 /* Debug */ = {
+		5585D0E4290EB75D00171750 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -226,7 +219,7 @@
 			};
 			name = Debug;
 		};
-		557EAE54290854A70049C0E1 /* Release */ = {
+		5585D0E5290EB75D00171750 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -281,43 +274,47 @@
 			};
 			name = Release;
 		};
-		557EAE56290854A70049C0E1 /* Debug */ = {
+		5585D0E7290EB75D00171750 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"FSUntetherGUI/Preview Content\"";
-				DEVELOPMENT_TEAM = Y9TY9LNQT9;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = FSUntetherGUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ingan121.FSUntetherGUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apple.Magnifier;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/**";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		557EAE57290854A70049C0E1 /* Release */ = {
+		5585D0E8290EB75D00171750 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"FSUntetherGUI/Preview Content\"";
-				DEVELOPMENT_TEAM = Y9TY9LNQT9;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = FSUntetherGUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ingan121.FSUntetherGUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apple.Magnifier;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/**";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -326,25 +323,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		557EAE3C290854A40049C0E1 /* Build configuration list for PBXProject "FSUntetherGUI" */ = {
+		5585D0D2290EB74900171750 /* Build configuration list for PBXProject "FSUntetherGUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				557EAE53290854A70049C0E1 /* Debug */,
-				557EAE54290854A70049C0E1 /* Release */,
+				5585D0E4290EB75D00171750 /* Debug */,
+				5585D0E5290EB75D00171750 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		557EAE55290854A70049C0E1 /* Build configuration list for PBXNativeTarget "FSUntetherGUI" */ = {
+		5585D0E6290EB75D00171750 /* Build configuration list for PBXNativeTarget "FSUntetherGUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				557EAE56290854A70049C0E1 /* Debug */,
-				557EAE57290854A70049C0E1 /* Release */,
+				5585D0E7290EB75D00171750 /* Debug */,
+				5585D0E8290EB75D00171750 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 557EAE39290854A40049C0E1 /* Project object */;
+	rootObject = 5585D0CF290EB74900171750 /* Project object */;
 }

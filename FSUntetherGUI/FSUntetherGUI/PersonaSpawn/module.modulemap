@@ -1,0 +1,3 @@
+module PersonaSpawn {
+    header "PersonaSpawn.h"
+}
