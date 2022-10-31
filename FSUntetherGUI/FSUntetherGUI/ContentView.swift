@@ -45,6 +45,12 @@ struct ContentView: View {
         }) {
             Text("Minimize")
         }
+        
+        Button(action: {
+            exit(0)
+        }) {
+            Text("Exit")
+        }
     }
 }
 

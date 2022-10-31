@@ -4,3 +4,5 @@ build
 *.swp
 FSUntetherGUI/build
 *.ipa
+iDownload/ncserver
+iDownload/TestFlightServices

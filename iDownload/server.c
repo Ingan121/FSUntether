@@ -573,6 +573,10 @@ void handleConnection(int socket) {
 }
 
 int main() {
+    if (setsid() == -1) {
+        fprintf(stderr, "setsid() failed: %s\n", strerror(errno));
+        return 1;
+    }
     dispatch_async(dispatch_queue_create("Server", NULL), ^{
         int server_fd = socket(AF_INET, SOCK_STREAM, 0);
         if (server_fd < 0) {
