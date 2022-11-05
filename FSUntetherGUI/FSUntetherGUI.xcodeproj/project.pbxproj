@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		557EF81C2916AC500029A0B7 /* silence.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 557EF81B2916AC500029A0B7 /* silence.mp3 */; };
 		5585D0DB290EB74900171750 /* FSUntetherGUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585D0DA290EB74900171750 /* FSUntetherGUIApp.swift */; };
 		5585D0DD290EB74900171750 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585D0DC290EB74900171750 /* ContentView.swift */; };
 		5585D0DF290EB75D00171750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5585D0DE290EB75D00171750 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		557EF81B2916AC500029A0B7 /* silence.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = silence.mp3; sourceTree = "<group>"; };
 		5585D0D7290EB74900171750 /* FSUntetherGUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSUntetherGUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5585D0DA290EB74900171750 /* FSUntetherGUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSUntetherGUIApp.swift; sourceTree = "<group>"; };
 		5585D0DC290EB74900171750 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				5585D0DA290EB74900171750 /* FSUntetherGUIApp.swift */,
 				5585D0DC290EB74900171750 /* ContentView.swift */,
 				5585D0DE290EB75D00171750 /* Assets.xcassets */,
+				557EF81B2916AC500029A0B7 /* silence.mp3 */,
 				5585D0E3290EB75D00171750 /* Info.plist */,
 				5585D0E0290EB75D00171750 /* Preview Content */,
 			);
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5585D0E2290EB75D00171750 /* Preview Assets.xcassets in Resources */,
+				557EF81C2916AC500029A0B7 /* silence.mp3 in Resources */,
 				5585D0DF290EB75D00171750 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +283,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FSUntetherGUI/FSUntetherGUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"FSUntetherGUI/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
@@ -302,6 +307,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FSUntetherGUI/FSUntetherGUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"FSUntetherGUI/Preview Content\"";
 				ENABLE_PREVIEWS = YES;

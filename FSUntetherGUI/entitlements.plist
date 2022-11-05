@@ -28,6 +28,10 @@
         <string>production</string>
         <key>com.apple.developer.usernotifications.time-sensitive</key>
         <true/>
+        <key>com.apple.developer.networking.networkextension</key>
+        <array>
+                <string>app-push-provider</string>
+        </array>
         <key>com.apple.QuartzCore.secure-mode</key>
         <true/>
         <key>com.apple.springboard.launchapplications</key>

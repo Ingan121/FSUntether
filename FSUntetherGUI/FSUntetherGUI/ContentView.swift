@@ -41,9 +41,30 @@ struct ContentView: View {
         }
         
         Button(action: {
+            let authOptions = UNAuthorizationOptions(arrayLiteral: .alert, .sound)
+
+            userNotificationCenter.requestAuthorization(options: authOptions) { success, error in
+                if let error = error {
+                    print("Error: \(error)")
+                }
+            }
+        }) {
+            Text("Request Notification Permission")
+        }
+        
+        Button(action: {
             UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
         }) {
             Text("Minimize")
+        }
+        
+        Button(action: {
+            guard let window = UIApplication.shared.windows.first else { return }
+            while true {
+               window.snapshotView(afterScreenUpdates: false)
+            }
+        }) {
+            Text("Respring")
         }
         
         Button(action: {
