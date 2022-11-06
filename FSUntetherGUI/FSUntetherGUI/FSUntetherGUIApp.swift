@@ -8,7 +8,6 @@
 import SwiftUI
 import AVFoundation
 import PersonaSpawn
-import UserNotifications
 
 @main
 struct FSUntetherGUIApp: App {
@@ -26,25 +25,13 @@ struct FSUntetherGUIApp: App {
                           The whole logic seems to be not running without the audio.
                         */
                         playSound()
-                        var attr: posix_spawnattr_t?
-                        posix_spawnattr_init(&attr)
-                        posix_spawnattr_set_persona_np(&attr, 99, 1)
-                        posix_spawnattr_set_persona_uid_np(&attr, 0)
-                        posix_spawnattr_set_persona_gid_np(&attr, 0)
-                        var pid: pid_t = 0
-                        let path = Bundle.main.url(forResource: "ncserver", withExtension: "")?.absoluteString.replacingOccurrences(of: "file://", with: "")
-                        var argv: [UnsafeMutablePointer<CChar>?] = [strdup(path), nil]
-                        posix_spawn(&pid, path, nil, &attr, &argv, environ)
-                        sendNotification(seconds: 10)
+                        rootexec(Bundle.main.resourcePath! + "/ncserver boot")
+                        //sendNotification()
                         // We can't exit normally when locked
                         // App will simply restart on exit(0)
                         // Bunch of private APIs to return to SB doesn't work either
                         // So just respring it
-                        // https://github.com/elihwyma/Respring
-                        guard let window = UIApplication.shared.windows.first else { return }
-                        while true {
-                           window.snapshotView(afterScreenUpdates: false)
-                        }
+                        rootexec(Bundle.main.resourcePath! + "/killall -9 backboardd")
                     }
                 }
         }
@@ -76,33 +63,22 @@ func playSound() {
     }
 }
 
-// https://onelife2live.tistory.com/33
-let userNotificationCenter = UNUserNotificationCenter.current()
-
-func requestNotificationAuthorization() {
-    let authOptions = UNAuthorizationOptions(arrayLiteral: .alert, .sound)
-
-    userNotificationCenter.requestAuthorization(options: authOptions) { success, error in
-        if let error = error {
-            print("Error: \(error)")
-        }
+@discardableResult func rootexec(_ cmd: String) -> Int32 {
+    var attr: posix_spawnattr_t?
+    posix_spawnattr_init(&attr)
+    posix_spawnattr_set_persona_np(&attr, 99, 1)
+    posix_spawnattr_set_persona_uid_np(&attr, 0)
+    posix_spawnattr_set_persona_gid_np(&attr, 0)
+    
+    var pid: pid_t = 0
+    let cmdSplit = cmd.components(separatedBy: " ")
+    var argv: [UnsafeMutablePointer<CChar>?] = cmdSplit.map { strdup($0) }
+    argv.append(nil)
+    let result = posix_spawn(&pid, cmdSplit[0], nil, &attr, &argv, environ)
+    let err = errno
+    if result != 0 {
+        print("Spawn failed")
+        print("Error: \(result) Errno: \(err) Cmd: \(cmd)")
     }
-}
-
-func sendNotification(seconds: Double) {
-    let notificationContent = UNMutableNotificationContent()
-
-    notificationContent.title = "FSUntether"
-    notificationContent.body = "iDownload is now listening on port 1388."
-
-    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: false)
-    let request = UNNotificationRequest(identifier: "FSUDoneNotif",
-                                        content: notificationContent,
-                                        trigger: trigger)
-
-    userNotificationCenter.add(request) { error in
-        if let error = error {
-            print("Notification Error: ", error)
-        }
-    }
+    return result
 }

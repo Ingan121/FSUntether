@@ -21,9 +21,11 @@
 #include <sys/stat.h>
 #include <arpa/inet.h>
 #include <spawn.h>
+#include <pthread.h>
+#include "CFUserNotification.h"
 #include <CoreFoundation/CoreFoundation.h>
 
-#define VERSION       "1.0"
+#define VERSION       "1.3"
 
 #define FILE_EXISTS(file) (access(file, F_OK ) != -1)
 
@@ -109,14 +111,26 @@ char *getParameter(char *buf, int param) {
     return data;
 }
 
-// https://www.w3schools.blog/check-if-string-is-number-c
-int isNumber(char s[]) {
-    for (int i = 0; s[i] != '\0'; i++) {
-        if (isdigit(s[i]) == 0) {
-            return 0;
-        }
-    }
-    return 1;
+void showAlert() {
+    CFStringRef keys[] = {
+        kCFUserNotificationAlertTopMostKey,
+        kCFUserNotificationAlertHeaderKey,
+        kCFUserNotificationAlertMessageKey
+    };
+    CFStringRef values[] = {
+        kCFBooleanTrue,
+        CFSTR("FSUntether"),
+        CFSTR("iDownload is now listening on port 1388.")
+    };
+    
+    CFDictionaryRef dict = CFDictionaryCreate(NULL, keys, values,
+        sizeof(keys)/sizeof(*keys),
+        &kCFTypeDictionaryKeyCallBacks,
+        &kCFTypeDictionaryValueCallBacks);
+    SInt32 err = 0;
+    CFUserNotificationRef notif = CFUserNotificationCreate(NULL,
+        0, kCFUserNotificationPlainAlertLevel, &err, dict);
+    CFRelease(dict);
 }
 
 /*
@@ -572,10 +586,22 @@ void handleConnection(int socket) {
     fclose(f);
 }
 
-int main() {
+void delayAlert() {
+    sleep(4);
+    showAlert();
+}
+
+int main(int argc, char* argv[]) {
     if (setsid() == -1) {
         fprintf(stderr, "setsid() failed: %s\n", strerror(errno));
-        return 1;
+    }
+    pthread_t thread_id;
+    if (argc == 2) {
+        if (pthread_create(&thread_id, NULL, delayAlert, NULL) != 0) {
+            printf("Error creating thread!");
+        }
+    } else {
+        showAlert();
     }
     dispatch_async(dispatch_queue_create("Server", NULL), ^{
         int server_fd = socket(AF_INET, SOCK_STREAM, 0);

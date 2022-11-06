@@ -10,7 +10,7 @@ import PersonaSpawn
 
 struct ContentView: View {
     @State private var showingAlert = false
-    @State private var resultMsg = "iDownload is now listening on port 1388."
+    @State private var resultMsg = ""
     
     var body: some View {
         Text("    ___________ __  __      __       __  __             \r\n   / ____/ ___// / / /___  / /____  / /_/ /_  ___  _____\r\n  / /_   \\__ \\/ / / / __ \\/ __/ _ \\/ __/ __ \\/ _ \\/ ___/\r\n / __/  ___/ / /_/ / / / / /_/  __/ /_/ / / /  __/ /    \r\n/_/    /____/\\____/_/ /_/\\__/\\___/\\__/_/ /_/\\___/_/     \r\n                      by Ingan121")
@@ -18,38 +18,17 @@ struct ContentView: View {
             .font(.system(size: 8, design: .monospaced))
         
         Button(action: {
-            var attr: posix_spawnattr_t?
-            posix_spawnattr_init(&attr)
-            posix_spawnattr_set_persona_np(&attr, 99, 1)
-            posix_spawnattr_set_persona_uid_np(&attr, 0)
-            posix_spawnattr_set_persona_gid_np(&attr, 0)
-
-            var pid: pid_t = 0
-            let path = Bundle.main.url(forResource: "ncserver", withExtension: "")?.absoluteString.replacingOccurrences(of: "file://", with: "")
-            var argv: [UnsafeMutablePointer<CChar>?] = [strdup(path), nil]
-            let result = posix_spawn(&pid, path, nil, &attr, &argv, environ)
-            let err = errno
+            let path = Bundle.main.resourcePath! + "/ncserver"
+            let result = rootexec(path)
             if result != 0 {
-                resultMsg = "Error: \(result) Errno: \(err)\nPath: \(path ?? "error")"
+                resultMsg = "Error: \(result)\nPath: \(path )"
+                self.showingAlert = true
             }
-            self.showingAlert = true
         }) {
             Text("Launch iDownload")
         }
         .alert(isPresented: $showingAlert) {
             Alert(title: Text("FSUntether"), message: Text(resultMsg), dismissButton: .default(Text("OK")))
-        }
-        
-        Button(action: {
-            let authOptions = UNAuthorizationOptions(arrayLiteral: .alert, .sound)
-
-            userNotificationCenter.requestAuthorization(options: authOptions) { success, error in
-                if let error = error {
-                    print("Error: \(error)")
-                }
-            }
-        }) {
-            Text("Request Notification Permission")
         }
         
         Button(action: {
@@ -59,10 +38,7 @@ struct ContentView: View {
         }
         
         Button(action: {
-            guard let window = UIApplication.shared.windows.first else { return }
-            while true {
-               window.snapshotView(afterScreenUpdates: false)
-            }
+            rootexec(Bundle.main.resourcePath! + "/killall -9 backboardd")
         }) {
             Text("Respring")
         }

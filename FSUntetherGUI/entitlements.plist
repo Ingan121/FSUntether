@@ -42,6 +42,8 @@
         <true/>
         <key>com.apple.springboard.hardware-button-service.background-event-consumption</key>
         <true/>
+        <key>com.apple.springboard.CFUserNotification</key>
+        <true/>
         
         <key>com.apple.private.security.storage.adprivacyd</key>
         <true/>
