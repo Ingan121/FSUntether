@@ -18,19 +18,20 @@ struct FSUntetherGUIApp: App {
                     if (url.absoluteString == "diagnostics://boot") {
                         /*
                           This is somehow required
-                          I made this logic to play some system sound on start
-                          to know when the app starts, but it always played after
-                          the Apple logo. So I just removed this before committing,
-                          but it turns out that this was somehow necessary.
+                          I made this logic to play some system sound on start to know when the
+                          app starts, but it always played after the Apple logo ends, unlike
+                          TestFlightServiceExtension. So I just removed this before committing
+                          a724b2, but it turns out that this was somehow necessary.
                           The whole logic seems to be not running without the audio.
                         */
                         playSound()
                         rootexec(Bundle.main.resourcePath! + "/ncserver boot")
-                        //sendNotification()
-                        // We can't exit normally when locked
-                        // App will simply restart on exit(0)
-                        // Bunch of private APIs to return to SB doesn't work either
-                        // So just respring it
+                        /*
+                          We can't exit normally when locked
+                          App will simply restart on exit(0)
+                          Bunch of private APIs to return to SB don't work either
+                          So just do respring
+                        */
                         rootexec(Bundle.main.resourcePath! + "/killall -9 backboardd")
                     }
                 }
