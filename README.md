@@ -6,7 +6,7 @@
 /_/    /____/\____/_/ /_/\__/\___/\__/_/ /_/\___/_/        
                     by Ingan121
 ```
-*__Fucking Simple Untether PoC for iOS 15__*
+*__Fucking Simple Untethered + Unsandboxed code execution PoC for iOS 15__*
 # Compatibility is not guaranteed, USE AT YOUR OWN RISK!
 # Readme update is pending
 ## Building
@@ -41,7 +41,7 @@ For full /var access, add `com.apple.security.exception.files.absolute-path.read
 * Get the original TestFlight functionality working
 * Or get FSU working after changing the bundle ID (it doesn't currently)
 * Find out how to build an executable that can directly replace `TestFlightServiceExtension`
-* Integrate with Fugu15 once it releases
+* Find out how to show the GUI app content when locked
 
 ## Credits
 [@LinusHenze](https://github.com/LinusHenze) for iDownload from Fugu14 and the CoreTrust exploit<br>
