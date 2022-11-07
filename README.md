@@ -12,11 +12,12 @@
 ## Building
 1. Get decrypted TestFlight ipa
 2. Extract it
-3. Build iDownload with
+3. Build FSUntether with
 ```
 cd iDownload
-clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -dynamiclib -o TestFlightServices server-dylib.c
-ldid -K../misc/dev_certificate.p12 TestFlightServices
+clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices autolauncher.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib
+clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o ncserver server.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks
+../FSUntetherGUI/build.sh
 ```
 * Xcode SDKs should work, too.
 * You must use [Procursus ldid](https://github.com/permasigner/ldid), not brew ldid.
@@ -26,12 +27,8 @@ ldid -K../misc/dev_certificate.p12 TestFlightServices
 7. Disable USB restricted mode, connect your phone to Mac, then reboot the device 
 8. Run `iproxy 1338 1338` and `nc localhost 1338` in separate terminals
 * TestFlight app will crash on launch, but the untether will work fine.
-* FSUntetherGUI is WIP.
-* iDownload is sandboxed, and unfortunately the sandbox entitlements seem to be ignored in app extensions. But I think this is enough for a kernel exploit to run.<br>
-For full /var access, add `com.apple.security.exception.files.absolute-path.read-write` on `TestFlightServiceExtension`. Exec/spawn is unavailable though.
-* Update: found it is possible to launch some apps in BFU with `SBSOpenSensitiveURLAndUnlock`, thus escaping the sandbox. Update coming soon. (Plan: replace the Magnifier app with FSUntetherGUI)
 * Tested on iPhone XS running iOS 15.4.1.
-* It also works when installed as a dev-signed user app. (So test it on 16?)
+* The untether part also works when installed as a dev-signed user app. (So test it on 16?)
 ## How does this work
 * `TestFlightServiceExtension` of `TestFlight.app` automatically starts on boot, even before first unlock. That's all `¯\_(ツ)_/¯`
 * How did I find this? Just ran sysdiagnose BFU and found this was the only process in `/var` that is started before first unlock.
