@@ -8,7 +8,7 @@
 ```
 *__Fucking Simple Untether PoC for iOS 15__*
 # Compatibility is not guaranteed, USE AT YOUR OWN RISK!
-
+# Readme update is pending
 ## Building
 1. Get decrypted TestFlight ipa
 2. Extract it
