@@ -8,7 +8,7 @@
 ```
 *__Fucking Simple Untethered + Unsandboxed code execution PoC for iOS 15__*
 # Compatibility is not guaranteed, USE AT YOUR OWN RISK!
-# Readme update is pending
+# Abandoned as I downgraded my iPhone Xs to iOS 14.3
 ## Building
 1. Get decrypted TestFlight ipa
 2. Extract it
