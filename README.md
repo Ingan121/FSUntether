@@ -8,7 +8,6 @@
 ```
 *__Fucking Simple Untethered + Unsandboxed code execution PoC for iOS 15__*
 # Compatibility is not guaranteed, USE AT YOUR OWN RISK!
-# Abandoned as I downgraded my iPhone Xs to iOS 14.3
 ## Building
 1. Get decrypted TestFlight ipa
 2. Extract it
@@ -28,7 +27,8 @@ clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o ncserver server.c -
 8. Run `iproxy 1338 1338` and `nc localhost 1338` in separate terminals
 * TestFlight app will crash on launch, but the untether will work fine.
 * Tested on iPhone XS running iOS 15.4.1.
-* The untether part also works when installed as a dev-signed user app. (So test it on 16?)
+* The untether part also works when installed as a dev-signed user app.
+  * Confirmed working on 15.1, 15.4.1, 16.1.1, and 16.1.2. On 14.3, `TestFlightServiceExtension` starts right after the first unlock, so no BFU code excution. (But there are [Fugu14](https://github.com/LinusHenze/Fugu14) and [fakesigning Haxx](https://github.com/asdfugil/haxx) that work BFU, you know.)
 ## How does this work
 * `TestFlightServiceExtension` of `TestFlight.app` automatically starts on boot, even before first unlock. That's all `¯\_(ツ)_/¯`
 * How did I find this? Just ran sysdiagnose BFU and found this was the only process in `/var` that is started before first unlock.
