@@ -31,6 +31,7 @@ extern char **environ;
 
 int SBSLaunchApplicationWithIdentifier(CFStringRef id, char flags);
 bool SBSOpenSensitiveURLAndUnlock(CFURLRef url, char flags);
+int64_t sandbox_extension_consume(const char* token);
 
 int runCommand(FILE *f, char *argv[]) {
     pid_t pid;
@@ -192,6 +193,7 @@ void printHelp(FILE *f) {
     fprintf(f, "exec <program> <args>:    Launch a program\r\n");
     fprintf(f, "open <bundleid> <flags>:  Launch a app\r\n");
     fprintf(f, "openurl <url>:            Launch a URL scheme\r\n");
+    fprintf(f, "sb_ext_consume <token>    Consume a sandbox extension\r\n");
     fprintf(f, "help:                     Print this help\r\n");
     fprintf(f, "\r\n");
 }
@@ -561,6 +563,15 @@ void handleConnection(int socket) {
                 free(url);
             } else {
                 fprintf(f, "Usage: openurl <url>\r\n");
+            }
+        } else if (strcmp(cmd, "sb_ext_consume") == 0) {
+            char *token = getParameter(cmdBuffer, 1);
+            
+            int64_t handle = sandbox_extension_consume(token);
+            if (handle > 0) {
+                fprintf(f, "Success\n");
+            } else {
+                fprintf(f, "Failed to consume the extension\n");
             }
         } else {
             fprintf(f, "Unknown command %s!\r\n", cmdBuffer);

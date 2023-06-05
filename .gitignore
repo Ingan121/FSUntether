@@ -3,6 +3,7 @@ build
 .ldid.*
 *.swp
 FSUntetherGUI/build
+MDCStorageGranter/build
 *.ipa
 iDownload/ncserver
 iDownload/TestFlightServices

@@ -1,0 +1,365 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		551FF0E52A2E3715003413F1 /* grant_full_disk_access.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FF0DF2A2E3714003413F1 /* grant_full_disk_access.m */; };
+		551FF0E62A2E3715003413F1 /* vm_unaligned_copy_switch_race.c in Sources */ = {isa = PBXBuildFile; fileRef = 551FF0E22A2E3715003413F1 /* vm_unaligned_copy_switch_race.c */; };
+		551FF0E72A2E3715003413F1 /* helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FF0E42A2E3715003413F1 /* helpers.m */; };
+		5585D0DB290EB74900171750 /* FSUntetherGUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585D0DA290EB74900171750 /* FSUntetherGUIApp.swift */; };
+		5585D0DD290EB74900171750 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585D0DC290EB74900171750 /* ContentView.swift */; };
+		5585D0DF290EB75D00171750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5585D0DE290EB75D00171750 /* Assets.xcassets */; };
+		5585D0E2290EB75D00171750 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5585D0E1290EB75D00171750 /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		551FF0DF2A2E3714003413F1 /* grant_full_disk_access.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = grant_full_disk_access.m; path = Exploit/grant_full_disk_access.m; sourceTree = "<group>"; };
+		551FF0E02A2E3714003413F1 /* vm_unaligned_copy_switch_race.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vm_unaligned_copy_switch_race.h; path = Exploit/vm_unaligned_copy_switch_race.h; sourceTree = "<group>"; };
+		551FF0E12A2E3714003413F1 /* helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = helpers.h; path = Exploit/helpers.h; sourceTree = "<group>"; };
+		551FF0E22A2E3715003413F1 /* vm_unaligned_copy_switch_race.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vm_unaligned_copy_switch_race.c; path = Exploit/vm_unaligned_copy_switch_race.c; sourceTree = "<group>"; };
+		551FF0E32A2E3715003413F1 /* grant_full_disk_access.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = grant_full_disk_access.h; path = Exploit/grant_full_disk_access.h; sourceTree = "<group>"; };
+		551FF0E42A2E3715003413F1 /* helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = helpers.m; path = Exploit/helpers.m; sourceTree = "<group>"; };
+		5585D0D7290EB74900171750 /* MDCStorageGranter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDCStorageGranter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5585D0DA290EB74900171750 /* FSUntetherGUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSUntetherGUIApp.swift; sourceTree = "<group>"; };
+		5585D0DC290EB74900171750 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5585D0DE290EB75D00171750 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5585D0E1290EB75D00171750 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5585D0E3290EB75D00171750 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5585D0D4290EB74900171750 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		551FF0DE2A2E36F4003413F1 /* Exploit */ = {
+			isa = PBXGroup;
+			children = (
+				551FF0E32A2E3715003413F1 /* grant_full_disk_access.h */,
+				551FF0DF2A2E3714003413F1 /* grant_full_disk_access.m */,
+				551FF0E12A2E3714003413F1 /* helpers.h */,
+				551FF0E42A2E3715003413F1 /* helpers.m */,
+				551FF0E22A2E3715003413F1 /* vm_unaligned_copy_switch_race.c */,
+				551FF0E02A2E3714003413F1 /* vm_unaligned_copy_switch_race.h */,
+			);
+			name = Exploit;
+			sourceTree = "<group>";
+		};
+		5585D0CE290EB74900171750 = {
+			isa = PBXGroup;
+			children = (
+				5585D0D9290EB74900171750 /* FSUntetherGUI */,
+				5585D0D8290EB74900171750 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5585D0D8290EB74900171750 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5585D0D7290EB74900171750 /* MDCStorageGranter.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5585D0D9290EB74900171750 /* FSUntetherGUI */ = {
+			isa = PBXGroup;
+			children = (
+				551FF0DE2A2E36F4003413F1 /* Exploit */,
+				5585D0DA290EB74900171750 /* FSUntetherGUIApp.swift */,
+				5585D0DC290EB74900171750 /* ContentView.swift */,
+				5585D0DE290EB75D00171750 /* Assets.xcassets */,
+				5585D0E3290EB75D00171750 /* Info.plist */,
+				5585D0E0290EB75D00171750 /* Preview Content */,
+			);
+			path = FSUntetherGUI;
+			sourceTree = "<group>";
+		};
+		5585D0E0290EB75D00171750 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				5585D0E1290EB75D00171750 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5585D0D6290EB74900171750 /* MDCStorageGranter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5585D0E6290EB75D00171750 /* Build configuration list for PBXNativeTarget "MDCStorageGranter" */;
+			buildPhases = (
+				5585D0D3290EB74900171750 /* Sources */,
+				5585D0D4290EB74900171750 /* Frameworks */,
+				5585D0D5290EB74900171750 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MDCStorageGranter;
+			productName = FSUntetherGUI;
+			productReference = 5585D0D7290EB74900171750 /* MDCStorageGranter.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5585D0CF290EB74900171750 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					5585D0D6290EB74900171750 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+				};
+			};
+			buildConfigurationList = 5585D0D2290EB74900171750 /* Build configuration list for PBXProject "MDCStorageGranter" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5585D0CE290EB74900171750;
+			productRefGroup = 5585D0D8290EB74900171750 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5585D0D6290EB74900171750 /* MDCStorageGranter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5585D0D5290EB74900171750 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5585D0E2290EB75D00171750 /* Preview Assets.xcassets in Resources */,
+				5585D0DF290EB75D00171750 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5585D0D3290EB74900171750 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5585D0DD290EB74900171750 /* ContentView.swift in Sources */,
+				5585D0DB290EB74900171750 /* FSUntetherGUIApp.swift in Sources */,
+				551FF0E62A2E3715003413F1 /* vm_unaligned_copy_switch_race.c in Sources */,
+				551FF0E52A2E3715003413F1 /* grant_full_disk_access.m in Sources */,
+				551FF0E72A2E3715003413F1 /* helpers.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5585D0E4290EB75D00171750 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5585D0E5290EB75D00171750 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5585D0E7290EB75D00171750 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FSUntetherGUI/FSUntetherGUI.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"FSUntetherGUI/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				INFOPLIST_FILE = FSUntetherGUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.apple.TestFlight;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/** $(SRCROOT)/FSUntetherGUI/GrantFullDiskAccess/Exploit";
+				SWIFT_OBJC_BRIDGING_HEADER = FSUntetherGUI/Exploit/grant_full_disk_access.h;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5585D0E8290EB75D00171750 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FSUntetherGUI/FSUntetherGUI.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"FSUntetherGUI/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				INFOPLIST_FILE = FSUntetherGUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.apple.TestFlight;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/** $(SRCROOT)/FSUntetherGUI/GrantFullDiskAccess/Exploit";
+				SWIFT_OBJC_BRIDGING_HEADER = FSUntetherGUI/Exploit/grant_full_disk_access.h;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5585D0D2290EB74900171750 /* Build configuration list for PBXProject "MDCStorageGranter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5585D0E4290EB75D00171750 /* Debug */,
+				5585D0E5290EB75D00171750 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5585D0E6290EB75D00171750 /* Build configuration list for PBXNativeTarget "MDCStorageGranter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5585D0E7290EB75D00171750 /* Debug */,
+				5585D0E8290EB75D00171750 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5585D0CF290EB74900171750 /* Project object */;
+}
