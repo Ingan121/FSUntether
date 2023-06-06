@@ -6,7 +6,7 @@
 /_/    /____/\____/_/ /_/\__/\___/\__/_/ /_/\___/_/        
                     by Ingan121
 ```
-*__Fucking Simple Untethered code execution PoC for iOS 15 and 16__*
+*__Fucking Simple Untethered code execution PoC for iOS 15, 16, and 17__*
 # Compatibility is not guaranteed, USE AT YOUR OWN RISK!
 ## Building
 1. Get decrypted TestFlight ipa
@@ -36,7 +36,7 @@ clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices 
 * TestFlight app will crash on launch, but the untether will work fine.
 * The untether part also works when installed as a dev-signed user app. Tested versions and devices:
   * iPhone Xs: 15.1, 15.4.1
-  * iPad Pro 12.9 6th gen: 16.1.1, 16.3.1, 16.4, 16.4.1, 16.5
+  * iPad Pro 12.9 6th gen: 16.1.1, 16.3.1, 16.4, 16.4.1, 16.5, 17.0DB1
   * iPhone 14 Pro Max: 16.1.2
   * On 14.3 (Xs), `TestFlightServiceExtension` starts a few seconds after the first unlock, so there's no BFU code execution. (But there are [Fugu14](https://github.com/LinusHenze/Fugu14) and [permasigning haxx](https://github.com/asdfugil/haxx) that work BFU on 14, you know.)
 ## How does this work
