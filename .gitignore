@@ -4,6 +4,7 @@ build
 *.swp
 FSUntetherGUI/build
 MDCStorageGranter/build
+iDownload/build
 *.ipa
 iDownload/ncserver
 iDownload/TestFlightServices

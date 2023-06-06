@@ -14,13 +14,13 @@ struct ContentView: View {
     var body: some View {
         Text("    ___________ __  __      __       __  __             \r\n   / ____/ ___// / / /___  / /____  / /_/ /_  ___  _____\r\n  / /_   \\__ \\/ / / / __ \\/ __/ _ \\/ __/ __ \\/ _ \\/ ___/\r\n / __/  ___/ / /_/ / / / / /_/  __/ /_/ / / /  __/ /    \r\n/_/    /____/\\____/_/ /_/\\__/\\___/\\__/_/ /_/\\___/_/     \r\n                      by Ingan121")
             .padding()
-            .font(.system(size: 8, design: .monospaced))
+            .font(.system(size: 8).monospaced())
         
         Button(action: {
             grant_full_disk_access() { error in
                 resultMsg = error?.localizedDescription ?? "Success"
-                self.showingAlert = true
             }
+            self.showingAlert = true
         }) {
             Text("Grant Full Disk Access")
         }
@@ -48,17 +48,12 @@ struct ContentView: View {
         
         Button(action: {
             let textToShare = [ FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("full_disk_access_sandbox_token.txt") ]
-                    let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+            let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
                     
             let scenes = UIApplication.shared.connectedScenes
-              let windowScene = scenes.first as? UIWindowScene
+            let windowScene = scenes.first as? UIWindowScene
                
-            if #available(iOS 15.0, *) {
-                windowScene?.keyWindow?.rootViewController?.present(activityViewController, animated: true, completion: nil)
-            } else {
-                // Fallback on earlier versions
-                // Not gonna support 14 lmao
-            }
+            windowScene?.keyWindow?.rootViewController?.present(activityViewController, animated: true, completion: nil)
                     
         }) {
             Text("Share sandbox extension token")
