@@ -10,31 +10,13 @@
 # Compatibility is not guaranteed, USE AT YOUR OWN RISK!
 ## Building
 1. Get decrypted TestFlight ipa
-2. Extract it
-3. Build FSUntether with
-* iOS 15 - 15.4.1 (full version with FSUntetherGUI and unsandboxed iDownload, for iOS/iPadOS versions with [TrollStore](https://github.com/opa334/TrollStore) support) :
-```
-cd iDownload
-clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices autolauncher.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib
-clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o ncserver server.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks
-../FSUntetherGUI/build.sh
-```
-* Anything higher than that (sandboxed iDownload; will work on any iOS/iPadOS 15+ device) :
-```
-cd iDownload
-clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices server-dylib.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib
-```
-* Or you can also use the prebuilt binaries in `prebuilt/`.
-* Xcode SDKs should work, too.
-* You must use [Procursus ldid](https://github.com/permasigner/ldid), not brew ldid.
-4. Replace `Payload/TestFlight.app/Frameworks/TestFlightServices.framework/TestFlightServices` with the built library
-5. Compress the Payload folder then change the extension to .ipa
-6. Install the modified TestFlight .ipa with TrollStore, AltStore, Sideloadly, ESign, etc.
-7. (FSUntetherGUI build only) Install the built FSUntetherGUI with TrollStore
-8. Disable USB restricted mode, connect your phone to your Mac or PC, then reboot the device 
-9. Run `iproxy 1338 1338` and `nc localhost 1338` in separate terminals
+2. Rename it to TestFlight.ipa and place it in the same directory as `build.sh`
+3. Build FSUntether with `build.sh` in the root of the repository.
+4. Install the built IPAs as instructed by `build.sh`
+5. Disable USB restricted mode, connect your phone to your Mac or PC, then reboot the device 
+6. Run `iproxy 1338 1338` and `nc localhost 1338` in separate terminals
 * TestFlight app will crash on launch, but the untether will work fine.
-* The untether part also works when installed as a dev-signed user app. Tested versions and devices:
+* Tested versions and devices:
   * iPhone Xs: 15.1, 15.4.1
   * iPad Pro 12.9 6th gen: 16.1.1, 16.3.1, 16.4, 16.4.1, 16.5, 17.0DB1
   * iPhone 14 Pro Max: 16.1.2
