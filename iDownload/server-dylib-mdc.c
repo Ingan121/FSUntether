@@ -194,8 +194,8 @@ void printHelp(FILE *f) {
     fprintf(f, "exec <program> <args>:    Launch a program\r\n");
     fprintf(f, "open <bundleid> <flags>:  Launch a app\r\n");
     fprintf(f, "openurl <url>:            Launch a URL scheme\r\n");
-    fprintf(f, "sb_ext_consume <token>    Consume a sandbox extension\r\n");
-    fprintf(f, "grant_full_disk_access    Grant full disk access\r\n");
+    fprintf(f, "sb_ext_consume <token>:   Consume a sandbox extension\r\n");
+    fprintf(f, "grant_full_disk_access:   Grant full disk access using MacDirtyCow\r\n");
     fprintf(f, "help:                     Print this help\r\n");
     fprintf(f, "\r\n");
 }
