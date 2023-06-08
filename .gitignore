@@ -2,9 +2,6 @@ build
 .DS_Store
 .ldid.*
 *.swp
-FSUntetherGUI/build
-MDCStorageGranter/build
-iDownload/build
 *.ipa
 iDownload/ncserver
 iDownload/TestFlightServices

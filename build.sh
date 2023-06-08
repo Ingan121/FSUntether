@@ -62,7 +62,7 @@ echo "  * Supported versions: 15.0-15.4.1, 15.5b1-b4, 15.6b1-b5 (AFU supported o
 echo "2) Semi-unsandboxed code execution (filesystem access only) with CVE-2022-26766 (permasigning)"
 echo "  * Supported versions: same as 1)\n"
 echo "3) Semi-unsandboxed code execution (filesystem access only) with CVE-2022-46689 (MacDirtyCow)"
-echo "  * Supported versions: 15.0-16.1.2 (14 and below are NOT supported)\n"
+echo "  * Supported versions: 15.0-15.7.1, 16.0-16.1.2 (14 and below are NOT supported)\n"
 echo "4) Sandboxed code execution (no filesystem access; untether only)"
 echo "  * Supported versions: 15.0-17.0DB1 (AFU supported on 14)\n"
 vared -p "Selection: " -c CHOICE
