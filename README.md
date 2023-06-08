@@ -47,6 +47,6 @@
 
 ## Credits
 [@LinusHenze](https://github.com/LinusHenze) for iDownload from Fugu14 and the CoreTrust exploit<br>
-[@opa334](https://github.com/opa334) for TrollStore
-[@comex](https://github.com/comex) for sbsutils
+[@opa334](https://github.com/opa334) for TrollStore<br>
+[@comex](https://github.com/comex) for sbsutils<br>
 [@zhuowei](https://github.com/zhuowei) for MacDirtyCow codes
