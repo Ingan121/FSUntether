@@ -46,7 +46,7 @@
     * Supported versions: 15.0-15.4.1, 15.5b1-b4, 15.6b1-b5 (AFU supported on 14)
     * The code injected to `TestFlightServiceExtension` launches FSUntetherGUI with `SBSOpenSensitiveURLAndUnlock`. This works while locked because FSUntetherGUI is replacing the Magnifier app.
     * And finally FSUntetherGUI launches unsandboxed, standalone iDownload.
-    * This iDownload is completely unsandboxed. It can access all the files, execute binaries, kill processes, and so on. Also it isn't affected by the below lifecycle, running forever on the device.
+    * This iDownload is completely unsandboxed. It can access all the files, execute binaries, kill processes, and so on. Also it isn't affected by the above lifecycle, running forever on the device.
     * After launching iDownload, FSUntetherGUI will respring the device to get you back in the lock screen. See the [related comment](https://github.com/Ingan121/FSUntether/blob/756c69061d9eb661fe1612c7806902553f8dfb7e/FSUntetherGUI/FSUntetherGUI/FSUntetherGUIApp.swift#L30) for more details.
     * FSUntetherGUI shows only a black screen when locked. I guess it has to do with the `com.apple.QuartzCore.secure-mode` entitlement (Magnifier, Camera, Notes, Calculator, etc. have it), but I don't know how to use it to get the app contents showing when locked.
 2. Semi-unsandboxed code execution with CVE-2022-26766 (permasigning)
