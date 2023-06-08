@@ -30,23 +30,13 @@
 * How did I find this? Just ran sysdiagnose BFU and found this was the only process in `/var` that is started before first unlock.
 * Getting arbitrary code execution was a bit hard though. Directly replacing `TestFlightServiceExtension` with permasigned binaries didn't seem to work, so I had to modify the library it loads.
 
-## Some notes about the untether's lifecycle
-* `TesfFlightServiceExtension` and the injected code start right after the app is installed.
-  * If the app is signed with an enterprise cert and the cert has not been trusted yet, it doesn't start at all. It can be started after trusting the cert, and it will start when the app is reinstalled or the device is rebooted.
-* Untether is not that fast. It usually starts 1-3 seconds before or after the Apple logo disappears.
-* If you're in Setup.app because of an update, it will not start before first unlock. It starts after unlocking and tapping the first button in Setup.app.
-* The injected code will become dormant a few minutes after starting. The port is still open and you can connect to it but iDownload won't respond. Nothing gets printed.
-* The code will completely stop more minutes later. The port is also closed and the connection will fail. (But `TestFlightServiceExtension` itself still runs.)
-* The process also randomly gets started in the background. I don't know the condition and timing.
-* Note: if iproxy prints `No connected device found` when the connection is failing, it means your device is not being properly detected. Please check if your device is not USB restricted (Settings → Passcode → Accessories must be ON), the cable is OK, or if some software like VMware is interfering with your connection.
-
 ## Unsandboxing Methods
 * Unsandboxing method varies per version; there are currently four supported build types.
 1. Fully unsandboxed code execution with CVE-2022-26766 (permasigning) and FSUntetherGUI
     * Supported versions: 15.0-15.4.1, 15.5b1-b4, 15.6b1-b5 (AFU supported on 14)
     * The code injected to `TestFlightServiceExtension` launches FSUntetherGUI with `SBSOpenSensitiveURLAndUnlock`. This works while locked because FSUntetherGUI is replacing the Magnifier app.
-    * And finally FSUntetherGUI launches unsandboxed, standalone iDownload.
-    * This iDownload is completely unsandboxed. It can access all the files, execute binaries, kill processes, and so on. Also it isn't affected by the above lifecycle, running forever on the device.
+    * And FSUntetherGUI launches unsandboxed, standalone iDownload as root.
+    * This iDownload is completely unsandboxed. It can access all the files, execute binaries, kill processes, and so on. Also it isn't affected by the below lifecycle, running forever on the device.
     * After launching iDownload, FSUntetherGUI will respring the device to get you back in the lock screen. See the [related comment](https://github.com/Ingan121/FSUntether/blob/756c69061d9eb661fe1612c7806902553f8dfb7e/FSUntetherGUI/FSUntetherGUI/FSUntetherGUIApp.swift#L30) for more details.
     * FSUntetherGUI shows only a black screen when locked. I guess it has to do with the `com.apple.QuartzCore.secure-mode` entitlement (Magnifier, Camera, Notes, Calculator, etc. have it), but I don't know how to use it to get the app contents showing when locked.
 2. Semi-unsandboxed code execution with CVE-2022-26766 (permasigning)
@@ -61,6 +51,16 @@
 4. Sandboxed code execution
     * Supported versions: 15.0-17.0DB1 (AFU supported on 14)
     * No unsandboxing at all. Things like `ls /var` will fail.
+
+## Some notes about the untether's lifecycle
+* `TesfFlightServiceExtension` and the injected code start right after the app is installed.
+  * If the app is signed with an enterprise cert and the cert has not been trusted yet, it doesn't start at all. It can be started after trusting the cert, and it will start when the app is reinstalled or the device is rebooted.
+* Untether is not that fast. It usually starts 1-3 seconds before or after the Apple logo disappears.
+* If you're in Setup.app because of an update, it will not start before first unlock. It starts after unlocking and tapping the first button in Setup.app.
+* The injected code will become dormant a few minutes after starting. The port is still open and you can connect to it but iDownload won't respond. Nothing gets printed.
+* The code will completely stop more minutes later. The port is also closed and the connection will fail. (But `TestFlightServiceExtension` itself still runs.)
+* The process also randomly gets started in the background. I don't know the condition and timing.
+* Note: if iproxy prints `No connected device found` when the connection is failing, it means your device is not being properly detected. Please check if your device is not USB restricted (Settings → Passcode → Accessories must be ON), the cable is OK, or if some software like VMware is interfering with your connection.
 
 ## Todo
 * Get the original TestFlight functionality working
