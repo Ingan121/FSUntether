@@ -101,8 +101,9 @@ if [[ $CHOICE == 1 ]]; then
     echo "\nBuilding FSUntether TestFlight..."
     cp ../iDownload/TestFlightServices $TFS
     ldid -e $TFSE > tfse.ent
-    echo "$(cat tfse.ent | tail -r | tail -n +3 | tail -r)" > tfse.ent
-    cat $CURRENTDIR/../misc/plist_parts/ent_opensensitiveurl.txt >> tfse.ent
+    # echo "$(cat tfse.ent | tail -r | tail -n +3 | tail -r)" > tfse.ent
+    # cat $CURRENTDIR/../misc/plist_parts/ent_opensensitiveurl.txt >> tfse.ent
+    /usr/libexec/PlistBuddy -c 'Add :com.apple.springboard.opensensitiveurl bool true' tfse.ent
     ldid -Stfse.ent -K../misc/dev_certificate.p12 $TFSE
     zip -r FSUntether.ipa Payload > /dev/null
      
@@ -117,8 +118,10 @@ elif [[ $CHOICE == 2 ]]; then
     echo "\nBuilding FSUntether TestFlight (Semi-unsandboxed)..."
     cp ../iDownload/TestFlightServices $TFS
     ldid -e $TFSE > tfse.ent
-    echo "$(cat tfse.ent | tail -r | tail -n +3 | tail -r)" > tfse.ent
-    cat $CURRENTDIR/../misc/plist_parts/ent_semiunsandbox.txt >> tfse.ent
+    # echo "$(cat tfse.ent | tail -r | tail -n +3 | tail -r)" > tfse.ent
+    # cat $CURRENTDIR/../misc/plist_parts/ent_semiunsandbox.txt >> tfse.ent
+    /usr/libexec/PlistBuddy -c 'Add :com.apple.security.exception.files.absolute-path.read-write dict' tfse.ent
+    /usr/libexec/PlistBuddy -c 'Add :com.apple.security.exception.files.absolute-path.read-write: string /' tfse.ent
     ldid -Stfse.ent -K../misc/dev_certificate.p12 $TFSE
     zip -r FSUntether.ipa Payload > /dev/null
     
@@ -130,8 +133,9 @@ elif [[ $CHOICE == 3 ]]; then
 
     echo "\nBuilding FSUntether TestFlight (MacDirtyCow)..."
     cp ../iDownload/TestFlightServices $TFS
-    echo "$(cat $INFOPLIST | tail -r | tail -n +3 | tail -r)" > $INFOPLIST
-    cat $CURRENTDIR/../misc/plist_parts/infoplist_fda.txt >> $INFOPLIST
+    # echo "$(cat $INFOPLIST | tail -r | tail -n +3 | tail -r)" > $INFOPLIST
+    # cat $CURRENTDIR/../misc/plist_parts/infoplist_fda.txt >> $INFOPLIST
+    /usr/libexec/PlistBuddy -c 'Add :NSAppleMusicUsageDescription string Full disk access before first unlock' $INFOPLIST
     zip -r FSUntether.ipa Payload > /dev/null
 
     echo "\nDone!"
