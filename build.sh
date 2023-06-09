@@ -98,7 +98,8 @@ if [[ $CHOICE == 1 ]]; then
     echo "\nBuilding FSUntether TestFlight..."
     cp ../iDownload/TestFlightServices $TFS
     ldid -e $TFSE > tfse.ent
-    cat tfse.ent | tail -r | tail -n +3 | tail -r | { echo "$(cat -)$(cat $CURRENTDIR/../misc/plist_parts/ent_opensensitiveurl.txt)" } > tfse.ent
+    echo "$(cat tfse.ent | tail -r | tail -n +3 | tail -r)" > tfse.ent
+    cat $CURRENTDIR/../misc/plist_parts/ent_opensensitiveurl.txt >> tfse.ent
     ldid -Stfse.ent -K../misc/dev_certificate.p12 $TFSE
     zip -r FSUntether.ipa Payload > /dev/null
      
@@ -113,7 +114,8 @@ elif [[ $CHOICE == 2 ]]; then
     echo "\nBuilding FSUntether TestFlight (Semi-unsandboxed)..."
     cp ../iDownload/TestFlightServices $TFS
     ldid -e $TFSE > tfse.ent
-    cat tfse.ent | tail -r | tail -n +3 | tail -r | { echo "$(cat -)$(cat $CURRENTDIR/../misc/plist_parts/ent_semiunsandbox.txt)" } > tfse.ent
+    echo "$(cat tfse.ent | tail -r | tail -n +3 | tail -r)" > tfse.ent
+    cat $CURRENTDIR/../misc/plist_parts/ent_semiunsandbox.txt >> tfse.ent
     ldid -Stfse.ent -K../misc/dev_certificate.p12 $TFSE
     zip -r FSUntether.ipa Payload > /dev/null
     
