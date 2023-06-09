@@ -456,7 +456,7 @@ void handleConnection(int socket) {
             char *bundleid = getParameter(cmdBuffer, 1);
             if (bundleid) {
                 NSString *nsstr = [NSString stringWithUTF8String: bundleid];
-				[[LSApplicationWorkspace defaultWorkspace] openApplicationWithBundleID: nsstr];
+                [[LSApplicationWorkspace defaultWorkspace] openApplicationWithBundleID: nsstr];
                 free(bundleid);
             } else {
                 fprintf(f, "Usage: open <bundleid>\r\n");
@@ -466,9 +466,9 @@ void handleConnection(int socket) {
             
             int64_t handle = sandbox_extension_consume(token);
             if (handle > 0) {
-                fprintf(f, "Success\n");
+                fprintf(f, "Success\r\n");
             } else {
-                fprintf(f, "Failed to consume the extension\n");
+                fprintf(f, "Failed to consume the extension\r\n");
             }
         } else {
             fprintf(f, "Unknown command %s!\r\n", cmdBuffer);
