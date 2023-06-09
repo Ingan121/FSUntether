@@ -20,35 +20,15 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <arpa/inet.h>
-#include <spawn.h>
 #include <CoreFoundation/CoreFoundation.h>
+#include "LSApplicationWorkspace.h"
 #include "Exploit/grant_full_disk_access.h"
 
 #define VERSION       "1.0"
 
 #define FILE_EXISTS(file) (access(file, F_OK ) != -1)
 
-extern char **environ;
-
-int SBSLaunchApplicationWithIdentifier(CFStringRef id, char flags);
-bool SBSOpenSensitiveURLAndUnlock(CFURLRef url, char flags);
 int64_t sandbox_extension_consume(const char* token);
-
-int runCommand(FILE *f, char *argv[]) {
-    pid_t pid;
-    posix_spawn_file_actions_t fa;
-    posix_spawn_file_actions_init(&fa);
-    posix_spawn_file_actions_adddup2(&fa, fileno(f), STDIN_FILENO);
-    posix_spawn_file_actions_adddup2(&fa, fileno(f), STDOUT_FILENO);
-    posix_spawn_file_actions_adddup2(&fa, fileno(f), STDERR_FILENO);
-    posix_spawn(&pid, argv[0], &fa, NULL, argv, environ);
-    
-    // Now wait for child
-    int status;
-    waitpid(pid, &status, 0);
-    
-    return 0;
-}
 
 bool readToNewline(FILE *f, char *buf, size_t size) {
     size_t cmdOffset = 0;
@@ -109,16 +89,6 @@ char *getParameter(char *buf, int param) {
     *next = ' ';
     
     return data;
-}
-
-// https://www.w3schools.blog/check-if-string-is-number-c
-int isNumber(char s[]) {
-    for (int i = 0; s[i] != '\0'; i++) {
-        if (isdigit(s[i]) == 0) {
-            return 0;
-        }
-    }
-    return 1;
 }
 
 /*
@@ -191,9 +161,7 @@ void printHelp(FILE *f) {
     fprintf(f, "chown <uid> <gid> <file>: Chown a file\r\n");
     fprintf(f, "info <file>:              Print file infos\r\n");
     fprintf(f, "mkdir <name>:             Create a directory\r\n");
-    fprintf(f, "exec <program> <args>:    Launch a program\r\n");
-    fprintf(f, "open <bundleid> <flags>:  Launch a app\r\n");
-    fprintf(f, "openurl <url>:            Launch a URL scheme\r\n");
+    fprintf(f, "open <bundleid>:          Launch a app\r\n");
     fprintf(f, "sb_ext_consume <token>:   Consume a sandbox extension\r\n");
     fprintf(f, "grant_full_disk_access:   Grant full disk access using MacDirtyCow\r\n");
     fprintf(f, "help:                     Print this help\r\n");
@@ -486,94 +454,23 @@ void handleConnection(int socket) {
             } else {
                 fprintf(f, "Usage: mkdir <name>\r\n");
             }
-        } else if (strcmp(cmd, "exec") == 0) {
-            char *param = getParameter(cmdBuffer, 1);
-            if (param) {
-                int ctr = 2;
-                while (1) {
-                    char *param = getParameter(cmdBuffer, ctr++);
-                    if (!param) {
-                        break;
-                    }
-                    
-                    free(param);
-                }
-                
-                char **buf = malloc(ctr * sizeof(char*));
-                buf[0] = param;
-                
-                ctr = 2;
-                while (1) {
-                    char *param = getParameter(cmdBuffer, ctr);
-                    if (!param) {
-                        break;
-                    }
-                    
-                    buf[(ctr++) - 1] = param;
-                }
-                
-                buf[ctr - 1] = NULL;
-                
-                int status = runCommand(f, buf);
-                while (*buf) {
-                    free(*buf);
-                    buf++;
-                }
-                
-                fprintf(f, "exec: Child status: %d\r\n", status);
-            } else {
-                fprintf(f, "Usage: exec <program> <args>\r\n");
-            }
         } else if (strcmp(cmd, "open") == 0) {
-            // https://github.com/comex/sbsutils/blob/master/sblaunch.c
             char *bundleid = getParameter(cmdBuffer, 1);
             if (bundleid) {
-                char *bg = getParameter(cmdBuffer, 2);
-                if (bg) {
-                    int flags = 0;
-                    if (strcmp(bg, "true") == 0) {
-                        flags = 1;
-                    }
-                    CFStringRef cs = CFStringCreateWithCString(NULL, bundleid, kCFStringEncodingUTF8);
-                    int err;
-                    //fprintf(f, "%s %i\r\n", bundleid, flags);
-                    if (err = SBSLaunchApplicationWithIdentifier(cs, flags)) {
-                        fprintf(stderr, "SBSLaunchApplicationWithIdentifier failed: %d\n", err);
-                    }
-  
-                    free(bg);
-                } else {
-                    fprintf(f, "Usage: open <bundleid> <background (true/false)>\r\n");
-                }
-
+                NSString *nsstr = [NSString stringWithUTF8String: bundleid];
+				[[LSApplicationWorkspace defaultWorkspace] openApplicationWithBundleID: nsstr];
                 free(bundleid);
             } else {
-                fprintf(f, "Usage: open <bundleid> <background (true/false)>\r\n");
-            }
-        } else if (strcmp(cmd, "openurl") == 0) {
-            // https://github.com/comex/sbsutils/blob/master/sbopenurl.c
-            char *url = getParameter(cmdBuffer, 1);
-            if (url) {
-                CFURLRef cu = CFURLCreateWithBytes(NULL, url, strlen(url), kCFStringEncodingUTF8, NULL);
-                if (!cu) {
-                    fprintf(stderr, "Invalid URL\n");
-                }
-                bool ret = SBSOpenSensitiveURLAndUnlock(cu, 1);
-                if (!ret) {
-                    fprintf(f, "SBSOpenSensitiveURLAndUnlock failed\n");
-                }
-                free(url);
-            } else {
-                fprintf(f, "Usage: openurl <url>\r\n");
+                fprintf(f, "Usage: open <bundleid>\r\n");
             }
         } else if (strcmp(cmd, "sb_ext_consume") == 0) {
             char *token = getParameter(cmdBuffer, 1);
             
             int64_t handle = sandbox_extension_consume(token);
             if (handle > 0) {
-                fprintf(f, "Success\r\n");
+                fprintf(f, "Success\n");
             } else {
-                fprintf(f, "Failed to consume the extension\r\n");
+                fprintf(f, "Failed to consume the extension\n");
             }
         } else if (strcmp(cmd, "grant_full_disk_access") == 0) {
             grant_full_disk_access(f);

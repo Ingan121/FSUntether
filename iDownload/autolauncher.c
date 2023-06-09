@@ -25,7 +25,7 @@ static int dylibMain() {
     if (uptime() >= 120) return 1;
     
     // https://github.com/comex/sbsutils/blob/master/sbopenurl.c
-    CFURLRef cu = CFURLCreateWithBytes(NULL, "diagnostics://boot", 18, kCFStringEncodingUTF8, NULL);
+    CFURLRef cu = CFURLCreateWithBytes(NULL, (UInt8 *)"diagnostics://boot", 18, kCFStringEncodingUTF8, NULL);
     if (!cu) {
         fprintf(stderr, "Invalid URL\n");
     }
