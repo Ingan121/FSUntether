@@ -90,14 +90,14 @@ if [[ $CHOICE == 1 ]]; then
     clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o ncserver server.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -w
     cd -
     
-    echo "\nBuilding FSUntetherGUI..."
+    echo "\nBuilding FSUntetherGUI (Fully unsandboxed)..."
     ../FSUntetherGUI/build.sh
     cp ../FSUntetherGUI/FSUntetherGUI.ipa .
     
     echo "\nBuilding FSUntether TestFlight..."
     cp ../iDownload/TestFlightServices $TFS
     ldid -e $TFSE > tfse.ent
-    cat tfse.ent | tail -r | tail -n +2 | tail -r | { echo "$(cat -)$(cat ../misc/plist_parts/ent_opensensitiveurl.txt)" } > tfse.ent
+    cat tfse.ent | tail -r | tail -n +3 | tail -r | { echo "$(cat -)$(cat ../misc/plist_parts/ent_opensensitiveurl.txt)" } > tfse.ent
     ldid -Stfse.ent -K../misc/dev_certificate.p12 $TFSE
     zip -r FSUntether.ipa Payload > /dev/null
      
@@ -109,10 +109,10 @@ elif [[ $CHOICE == 2 ]]; then
     clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices server-dylib.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib -w
     cd -
     
-    echo "\nBuilding FSUntether TestFlight..."
+    echo "\nBuilding FSUntether TestFlight (Semi-unsandboxed)..."
     cp ../iDownload/TestFlightServices $TFS
     ldid -e $TFSE > tfse.ent
-    cat tfse.ent | tail -r | tail -n +2 | tail -r | { echo "$(cat -)$(cat ../misc/plist_parts/ent_semiunsandbox.txt)" } > tfse.ent
+    cat tfse.ent | tail -r | tail -n +3 | tail -r | { echo "$(cat -)$(cat ../misc/plist_parts/ent_semiunsandbox.txt)" } > tfse.ent
     ldid -Stfse.ent -K../misc/dev_certificate.p12 $TFSE
     zip -r FSUntether.ipa Payload > /dev/null
     
@@ -122,9 +122,9 @@ elif [[ $CHOICE == 3 ]]; then
     echo "\nBuilding iDownload..."
     ../iDownload/build_mdc.sh
 
-    echo "\nBuilding FSUntether TestFlight..."
+    echo "\nBuilding FSUntether TestFlight (MacDirtyCow)..."
     cp ../iDownload/TestFlightServices $TFS
-    cat $INFOPLIST | tail -r | tail -n +2 | tail -r | { echo "$(cat -)$(cat ../misc/plist_parts/infoplist_fda.txt)" } > $INFOPLIST
+    cat $INFOPLIST | tail -r | tail -n +3 | tail -r | { echo "$(cat -)$(cat ../misc/plist_parts/infoplist_fda.txt)" } > $INFOPLIST
     zip -r FSUntether.ipa Payload > /dev/null
 
     echo "\nDone!"
@@ -136,7 +136,7 @@ elif [[ $CHOICE == 4 ]]; then
     clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices server-dylib.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib -w
     cd -
 
-    echo "\nBuilding FSUntether TestFlight..."
+    echo "\nBuilding FSUntether TestFlight (Sandboxed)..."
     cp ../iDownload/TestFlightServices $TFS
     zip -r FSUntether.ipa Payload > /dev/null
 
