@@ -17,12 +17,6 @@ rm -rf "${0:A:h}/build"
 mkdir "${0:A:h}/build"
 cd "${0:A:h}/build"
 
-if [[ ! -n $(ldid 2>&1 1>/dev/null | grep procursus) ]] then
-    echo Procursus ldid is not installed!
-    echo Please install it from https://github.com/permasigner/ldid/releases!
-    exit -1
-fi
-
 if [[ ! -a ~/theos/sdks/iPhoneOS14.5.sdk ]]; then
     echo "Required theos SDK is not installed, installing..."
     mkdir ~/theos
@@ -67,9 +61,10 @@ echo "  * Supported versions: 15.0-15.7.1, 16.0-16.1.2 (14 and below are NOT sup
 echo "4) Sandboxed code execution (no filesystem access; untether only)"
 echo "  * Supported versions: 15.0-17.0DB1 (AFU supported on 14)\n"
 vared -p "Selection: " -c CHOICE
+echo
 
 if [[ $CHOICE == 1 ]]; then
-    if [[ ! $(xcode-select -p) = *"Xcode.app"* ]] then
+    if [[ ! $(xcode-select -p) = *"Xcode.app"* ]]; then
         echo Xcode is not installed or active developer directory is a command line tools instance!
         echo Please install or xcode-select Xcode!
         cd -
@@ -84,10 +79,18 @@ else
     fi
 fi
 
+if [[ $CHOICE == 1 || $CHOICE == 2 ]]; then
+    if [[ ! -n $(ldid 2>&1 1>/dev/null | grep procursus) ]]; then
+        echo Procursus ldid is not installed!
+        echo Please install it from https://github.com/ProcursusTeam/ldid
+        exit -1
+    fi
+fi
+
 if [[ $CHOICE == 1 ]]; then
-    echo "\nBuilding iDownload and AutoLauncher..."
+    echo "Building iDownload and AutoLauncher..."
     cd ../iDownload
-    clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices autolauncher.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib -w
+    clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices autolauncher.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib
     clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o ncserver server.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -w
     cd -
     
@@ -106,9 +109,9 @@ if [[ $CHOICE == 1 ]]; then
     echo "\nDone!"
     echo Please uninstall the original TestFlight first, then install FSUntetherGUI.ipa and FSUntether.ipa with TrollStore.
 elif [[ $CHOICE == 2 ]]; then
-    echo "\nBuilding iDownload..."
+    echo "Building iDownload..."
     cd ../iDownload
-    clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices server-dylib.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib -w
+    clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices server-dylib.m -framework CoreFoundation -framework SpringBoardServices -framework MobileCoreServices -framework Foundation -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib
     cd -
     
     echo "\nBuilding FSUntether TestFlight (Semi-unsandboxed)..."
@@ -122,7 +125,7 @@ elif [[ $CHOICE == 2 ]]; then
     echo "\nDone!"
     echo Please uninstall the original TestFlight first, then install FSUntether.ipa with TrollStore.
 elif [[ $CHOICE == 3 ]]; then
-    echo "\nBuilding iDownload..."
+    echo "Building iDownload..."
     ../iDownload/build_mdc.sh
 
     echo "\nBuilding FSUntether TestFlight (MacDirtyCow)..."
@@ -135,9 +138,9 @@ elif [[ $CHOICE == 3 ]]; then
     echo Please uninstall the original TestFlight first, then sideload FSUntether.ipa.
     echo You must retain the original com.apple.TestFlight bundle ID.
 elif [[ $CHOICE == 4 ]]; then
-    echo "\nBuilding iDownload..."
+    echo "Building iDownload..."
     cd ../iDownload
-    clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices server-dylib.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib -w
+    clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices server-dylib.m -framework CoreFoundation -framework SpringBoardServices -framework MobileCoreServices -framework Foundation -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib
     cd -
 
     echo "\nBuilding FSUntether TestFlight (Sandboxed)..."
@@ -148,7 +151,8 @@ elif [[ $CHOICE == 4 ]]; then
     echo Please uninstall the original TestFlight first, then sideload FSUntether.ipa.
     echo You must retain the original com.apple.TestFlight bundle ID.
 else
-    echo "\nInvalid selection!\nExiting..."
+    echo Invalid selection!
+    echo Exiting...
 fi
 
 cd -

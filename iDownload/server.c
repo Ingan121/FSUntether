@@ -564,7 +564,7 @@ void handleConnection(int socket) {
             // https://github.com/comex/sbsutils/blob/master/sbopenurl.c
             char *url = getParameter(cmdBuffer, 1);
             if (url) {
-                CFURLRef cu = CFURLCreateWithBytes(NULL, url, strlen(url), kCFStringEncodingUTF8, NULL);
+                CFURLRef cu = CFURLCreateWithBytes(NULL, (UInt8 *)url, strlen(url), kCFStringEncodingUTF8, NULL);
                 if (!cu) {
                     fprintf(stderr, "Invalid URL\n");
                 }
