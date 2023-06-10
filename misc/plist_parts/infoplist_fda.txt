@@ -1,5 +1,0 @@
-
-	<key>NSAppleMusicUsageDescription</key>
-	<string>Full disk access before first unlock</string>
-</dict>
-</plist>

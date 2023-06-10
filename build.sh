@@ -17,6 +17,11 @@ rm -rf "${0:A:h}/build"
 mkdir "${0:A:h}/build"
 cd "${0:A:h}/build"
 
+if [[ ! $(uname) = "Darwin" ]]; then
+    echo "Sorry, building is only supported on macOS."
+    exit -1
+fi
+
 if [[ ! -a ~/theos/sdks/iPhoneOS14.5.sdk ]]; then
     echo "Required theos SDK is not installed, installing..."
     mkdir ~/theos
@@ -37,7 +42,6 @@ unzip ../TestFlight.ipa > /dev/null
 TFS=Payload/TestFlight.app/Frameworks/TestFlightServices.framework/TestFlightServices
 TFSE=Payload/TestFlight.app/PlugIns/TestFlightServiceExtension.appex/TestFlightServiceExtension
 INFOPLIST=Payload/TestFlight.app/Info.plist
-CURRENTDIR=$(pwd)
 
 if type otool > /dev/null; then
     if [[ $(otool -l $TFSE | grep cryptid) = *"cryptid 1"* ]]; then
@@ -101,8 +105,6 @@ if [[ $CHOICE == 1 ]]; then
     echo "\nBuilding FSUntether TestFlight..."
     cp ../iDownload/TestFlightServices $TFS
     ldid -e $TFSE > tfse.ent
-    # echo "$(cat tfse.ent | tail -r | tail -n +3 | tail -r)" > tfse.ent
-    # cat $CURRENTDIR/../misc/plist_parts/ent_opensensitiveurl.txt >> tfse.ent
     /usr/libexec/PlistBuddy -c 'Add :com.apple.springboard.opensensitiveurl bool true' tfse.ent
     ldid -Stfse.ent -K../misc/dev_certificate.p12 $TFSE
     zip -r FSUntether.ipa Payload > /dev/null
@@ -118,9 +120,7 @@ elif [[ $CHOICE == 2 ]]; then
     echo "\nBuilding FSUntether TestFlight (Semi-unsandboxed)..."
     cp ../iDownload/TestFlightServices $TFS
     ldid -e $TFSE > tfse.ent
-    # echo "$(cat tfse.ent | tail -r | tail -n +3 | tail -r)" > tfse.ent
-    # cat $CURRENTDIR/../misc/plist_parts/ent_semiunsandbox.txt >> tfse.ent
-    /usr/libexec/PlistBuddy -c 'Add :com.apple.security.exception.files.absolute-path.read-write dict' tfse.ent
+    /usr/libexec/PlistBuddy -c 'Add :com.apple.security.exception.files.absolute-path.read-write array' tfse.ent
     /usr/libexec/PlistBuddy -c 'Add :com.apple.security.exception.files.absolute-path.read-write: string /' tfse.ent
     ldid -Stfse.ent -K../misc/dev_certificate.p12 $TFSE
     zip -r FSUntether.ipa Payload > /dev/null
@@ -133,8 +133,6 @@ elif [[ $CHOICE == 3 ]]; then
 
     echo "\nBuilding FSUntether TestFlight (MacDirtyCow)..."
     cp ../iDownload/TestFlightServices $TFS
-    # echo "$(cat $INFOPLIST | tail -r | tail -n +3 | tail -r)" > $INFOPLIST
-    # cat $CURRENTDIR/../misc/plist_parts/infoplist_fda.txt >> $INFOPLIST
     /usr/libexec/PlistBuddy -c 'Add :NSAppleMusicUsageDescription string Full disk access before first unlock' $INFOPLIST
     zip -r FSUntether.ipa Payload > /dev/null
 

@@ -1,5 +1,0 @@
-
-        <key>com.apple.springboard.opensensitiveurl</key>
-        <true/>
-</dict>
-</plist>
