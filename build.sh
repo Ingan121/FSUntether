@@ -37,6 +37,7 @@ unzip ../TestFlight.ipa > /dev/null
 TFS=Payload/TestFlight.app/Frameworks/TestFlightServices.framework/TestFlightServices
 TFSE=Payload/TestFlight.app/PlugIns/TestFlightServiceExtension.appex/TestFlightServiceExtension
 INFOPLIST=Payload/TestFlight.app/Info.plist
+CURRENTDIR=$(pwd)
 
 if type otool > /dev/null; then
     if [[ $(otool -l $TFSE | grep cryptid) = *"cryptid 1"* ]]; then
@@ -93,14 +94,16 @@ if [[ $CHOICE == 1 ]]; then
     clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o ncserver server.c -framework CoreFoundation -framework SpringBoardServices -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -w
     cd -
     
-    echo "\nBuilding FSUntetherGUI..."
+    echo "\nBuilding FSUntetherGUI (Fully unsandboxed)..."
     ../FSUntetherGUI/build.sh
     cp ../FSUntetherGUI/FSUntetherGUI.ipa .
     
     echo "\nBuilding FSUntether TestFlight..."
     cp ../iDownload/TestFlightServices $TFS
     ldid -e $TFSE > tfse.ent
-    cat tfse.ent | tail -r | tail -n +2 | tail -r | { echo "$(cat -)$(cat ../misc/plist_parts/ent_opensensitiveurl.txt)" } > tfse.ent
+    # echo "$(cat tfse.ent | tail -r | tail -n +3 | tail -r)" > tfse.ent
+    # cat $CURRENTDIR/../misc/plist_parts/ent_opensensitiveurl.txt >> tfse.ent
+    /usr/libexec/PlistBuddy -c 'Add :com.apple.springboard.opensensitiveurl bool true' tfse.ent
     ldid -Stfse.ent -K../misc/dev_certificate.p12 $TFSE
     zip -r FSUntether.ipa Payload > /dev/null
      
@@ -112,10 +115,13 @@ elif [[ $CHOICE == 2 ]]; then
     clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices server-dylib.m -framework CoreFoundation -framework SpringBoardServices -framework MobileCoreServices -framework Foundation -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib
     cd -
     
-    echo "\nBuilding FSUntether TestFlight..."
+    echo "\nBuilding FSUntether TestFlight (Semi-unsandboxed)..."
     cp ../iDownload/TestFlightServices $TFS
     ldid -e $TFSE > tfse.ent
-    cat tfse.ent | tail -r | tail -n +2 | tail -r | { echo "$(cat -)$(cat ../misc/plist_parts/ent_semiunsandbox.txt)" } > tfse.ent
+    # echo "$(cat tfse.ent | tail -r | tail -n +3 | tail -r)" > tfse.ent
+    # cat $CURRENTDIR/../misc/plist_parts/ent_semiunsandbox.txt >> tfse.ent
+    /usr/libexec/PlistBuddy -c 'Add :com.apple.security.exception.files.absolute-path.read-write dict' tfse.ent
+    /usr/libexec/PlistBuddy -c 'Add :com.apple.security.exception.files.absolute-path.read-write: string /' tfse.ent
     ldid -Stfse.ent -K../misc/dev_certificate.p12 $TFSE
     zip -r FSUntether.ipa Payload > /dev/null
     
@@ -125,9 +131,11 @@ elif [[ $CHOICE == 3 ]]; then
     echo "Building iDownload..."
     ../iDownload/build_mdc.sh
 
-    echo "\nBuilding FSUntether TestFlight..."
+    echo "\nBuilding FSUntether TestFlight (MacDirtyCow)..."
     cp ../iDownload/TestFlightServices $TFS
-    cat $INFOPLIST | tail -r | tail -n +2 | tail -r | { echo "$(cat -)$(cat ../misc/plist_parts/infoplist_fda.txt)" } > $INFOPLIST
+    # echo "$(cat $INFOPLIST | tail -r | tail -n +3 | tail -r)" > $INFOPLIST
+    # cat $CURRENTDIR/../misc/plist_parts/infoplist_fda.txt >> $INFOPLIST
+    /usr/libexec/PlistBuddy -c 'Add :NSAppleMusicUsageDescription string Full disk access before first unlock' $INFOPLIST
     zip -r FSUntether.ipa Payload > /dev/null
 
     echo "\nDone!"
@@ -139,7 +147,7 @@ elif [[ $CHOICE == 4 ]]; then
     clang -arch arm64 -isysroot ~/theos/sdks/iPhoneOS14.5.sdk -o TestFlightServices server-dylib.m -framework CoreFoundation -framework SpringBoardServices -framework MobileCoreServices -framework Foundation -F ~/theos/sdks/iPhoneOS14.5.sdk/System/Library/PrivateFrameworks -dynamiclib
     cd -
 
-    echo "\nBuilding FSUntether TestFlight..."
+    echo "\nBuilding FSUntether TestFlight (Sandboxed)..."
     cp ../iDownload/TestFlightServices $TFS
     zip -r FSUntether.ipa Payload > /dev/null
 
