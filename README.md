@@ -13,8 +13,8 @@
 2. Rename it to TestFlight.ipa and place it in the same directory as `build.sh`
 3. Build FSUntether with `build.sh` in the root of the repository.
 4. Install the built IPAs as instructed by `build.sh`
-  * You'll need a paid certificate to retain the original `com.apple.TestFlight` bundle ID, if you're not using TrollStore.
-  * FSUntether currently doesn't work if the bundle ID is changed.
+    * You'll need a paid certificate to retain the original `com.apple.TestFlight` bundle ID, if you're not using TrollStore.
+    * FSUntether currently doesn't work if the bundle ID is changed.
 5. Disable USB restricted mode, connect your phone to your Mac or PC, then reboot the device 
 6. Run `iproxy 1338 1338` and `nc localhost 1338` in separate terminals
 * TestFlight app will crash on launch, but the untether will work fine.
