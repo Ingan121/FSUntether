@@ -21,6 +21,7 @@
 #include <sys/stat.h>
 #include <arpa/inet.h>
 #include <CoreFoundation/CoreFoundation.h>
+#include <sys/sysctl.h>
 #include "LSApplicationWorkspace.h"
 #include "Exploit/grant_full_disk_access.h"
 
@@ -29,6 +30,22 @@
 #define FILE_EXISTS(file) (access(file, F_OK ) != -1)
 
 int64_t sandbox_extension_consume(const char* token);
+
+// https://stackoverflow.com/a/36204023
+int uptime() {
+    struct timeval boottime;
+    int mib[2] = {CTL_KERN, KERN_BOOTTIME};
+    size_t size = sizeof(boottime);
+    time_t now;
+    time_t uptime = -1;
+
+    (void)time(&now);
+
+    if (sysctl(mib, 2, &boottime, &size, NULL, 0) != -1 && boottime.tv_sec != 0) {
+        uptime = now - boottime.tv_sec;
+    }
+    return uptime;
+}
 
 bool readToNewline(FILE *f, char *buf, size_t size) {
     size_t cmdOffset = 0;
@@ -168,13 +185,15 @@ void printHelp(FILE *f) {
     fprintf(f, "\r\n");
 }
 
-void handleConnection(int socket) {
+void handleConnection(int socket, int start_uptime) {
     FILE *f = fdopen(socket, "r+b");
     if (f == NULL) {
         return;
     }
     
     fprintf(f, "iDownload version " VERSION " ready.\r\n");
+    fprintf(f, "Uptime on start: %d\r\n", start_uptime);
+    fprintf(f, "Uptime on connection: %d\r\n", uptime());
     
     char *cmdBuffer = malloc(2048);
     
@@ -486,6 +505,7 @@ void handleConnection(int socket) {
 
 __attribute__((constructor))
 static int dylibMain() {
+    int start_uptime = uptime();
     dispatch_async(dispatch_queue_create("Server", NULL), ^{
         int server_fd = socket(AF_INET, SOCK_STREAM, 0);
         if (server_fd < 0) {
@@ -531,7 +551,7 @@ static int dylibMain() {
             }
             
             dispatch_async(dispatch_queue_create(NULL, NULL), ^{
-                handleConnection(new_socket);
+                handleConnection(new_socket, start_uptime);
             });
         }
     });
