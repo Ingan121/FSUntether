@@ -12,11 +12,6 @@ echo "Untether is fully supported on iOS 15, 16, and 17 with BFU code execution.
 echo "  (AFU code execution is supported on iOS 14)"
 echo "Unsandboxing method varies per version; please see the options below.\n"
 
-echo Preparing...
-rm -rf "${0:A:h}/build"
-mkdir "${0:A:h}/build"
-cd "${0:A:h}/build"
-
 if [[ ! $(uname) = "Darwin" ]]; then
     echo "Sorry, building is only supported on macOS."
     exit -1
@@ -29,6 +24,11 @@ if [[ ! -a ~/theos/sdks/iPhoneOS14.5.sdk ]]; then
     git clone https://github.com/Ingan121/sdks --depth 1
     cd -
 fi
+
+echo Preparing...
+rm -rf "${0:A:h}/build"
+mkdir "${0:A:h}/build"
+cd "${0:A:h}/build"
 
 if [[ ! -a ../TestFlight.ipa ]]; then
     echo "Please place a DECRYPTED TestFlight IPA in the root of this project (the same folder as this script.)"
@@ -70,6 +70,7 @@ if [[ ! -n $1 ]]; then
     echo
 else
     CHOICE=$1
+    echo "Selection: $CHOICE\n"
 fi
 
 if [[ $CHOICE == 1 ]]; then
@@ -92,6 +93,7 @@ if [[ $CHOICE == 1 || $CHOICE == 2 ]]; then
     if [[ ! -n $(ldid 2>&1 1>/dev/null | grep procursus) ]]; then
         echo Procursus ldid is not installed!
         echo Please install it from https://github.com/ProcursusTeam/ldid
+        cd -
         exit -1
     fi
 fi

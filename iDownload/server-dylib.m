@@ -24,6 +24,9 @@
 #include <sys/sysctl.h>
 #include <sys/utsname.h>
 #include "LSApplicationWorkspace.h"
+#ifdef MDC
+#include "Exploit/grant_full_disk_access.h"
+#endif
 
 #define VERSION       "1.0"
 
@@ -181,6 +184,9 @@ void printHelp(FILE *f) {
     fprintf(f, "mkdir <name>:             Create a directory\r\n");
     fprintf(f, "open <bundleid>:          Launch a app\r\n");
     fprintf(f, "sb_ext_consume <token>:   Consume a sandbox extension\r\n");
+#ifdef MDC
+    fprintf(f, "grant_full_disk_access:   Grant full disk access using MacDirtyCow\r\n");
+#endif
     fprintf(f, "help:                     Print this help\r\n");
     fprintf(f, "\r\n");
 }
@@ -497,6 +503,10 @@ void handleConnection(int socket, int start_uptime) {
             } else {
                 fprintf(f, "Failed to consume the extension\r\n");
             }
+#ifdef MDC
+        } else if (strcmp(cmd, "grant_full_disk_access") == 0) {
+            grant_full_disk_access(f);
+#endif
         } else {
             fprintf(f, "Unknown command %s!\r\n", cmdBuffer);
         }
