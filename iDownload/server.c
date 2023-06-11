@@ -24,6 +24,7 @@
 #include <pthread.h>
 #include "CFUserNotification.h"
 #include <CoreFoundation/CoreFoundation.h>
+#include <sys/utsname.h>
 
 #define VERSION       "1.3"
 
@@ -189,6 +190,7 @@ void printHelp(FILE *f) {
     fprintf(f, "The following commands are supported:\r\n");
     fprintf(f, "exit:                     Close connection\r\n");
     fprintf(f, "exit_full:                Close connection and terminate jailbreakd\r\n");
+    fprintf(f, "uname:                    Print system information\r\n");
     fprintf(f, "pwd:                      Print current working directory\r\n");
     fprintf(f, "cd <directory>:           Change directory\r\n");
     fprintf(f, "ls <optional path>:       List directory\r\n");
@@ -240,6 +242,12 @@ void handleConnection(int socket) {
         } else if (strcmp(cmd, "exit_full") == 0) {
             fprintf(f, "Completely exiting.\r\nBye!\r\n");
             exit(0);
+        } else if (strcmp(cmd, "uname") == 0) {
+            struct utsname buf;
+            if (uname(&buf) < 0) {
+                fprintf(f, "uname: %d\r\n", errno);
+            }
+            fprintf(f, "%s %s %s %s %s\r\n", buf.sysname, buf.nodename, buf.release, buf.version, buf.machine);
         } else if (strcmp(cmd, "pwd") == 0) {
             char cwd[PATH_MAX];
             memset(cwd, 0, PATH_MAX);
