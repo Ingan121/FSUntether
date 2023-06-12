@@ -42,6 +42,7 @@ unzip ../TestFlight.ipa > /dev/null
 TFS=Payload/TestFlight.app/Frameworks/TestFlightServices.framework/TestFlightServices
 TFSE=Payload/TestFlight.app/PlugIns/TestFlightServiceExtension.appex/TestFlightServiceExtension
 INFOPLIST=Payload/TestFlight.app/Info.plist
+TFSE_INFOPLIST=Payload/TestFlight.app/PlugIns/TestFlightServiceExtension.appex/Info.plist
 
 if type otool > /dev/null; then
     if [[ $(otool -l $TFSE | grep cryptid) = *"cryptid 1"* ]]; then
@@ -111,6 +112,7 @@ if [[ $CHOICE == 1 ]]; then
     
     echo "\nBuilding FSUntether TestFlight..."
     cp ../iDownload/TestFlightServices $TFS
+    /usr/libexec/PlistBuddy -c "Set :NSExtension:ASDTestFlightServiceExtensionServiceTime -1" $TFSE_INFOPLIST
     ldid -e $TFSE > tfse.ent
     /usr/libexec/PlistBuddy -c 'Add :com.apple.springboard.opensensitiveurl bool true' tfse.ent
     ldid -Stfse.ent -K../misc/dev_certificate.p12 $TFSE
@@ -126,6 +128,7 @@ elif [[ $CHOICE == 2 ]]; then
     
     echo "\nBuilding FSUntether TestFlight (Semi-unsandboxed)..."
     cp ../iDownload/TestFlightServices $TFS
+    /usr/libexec/PlistBuddy -c "Set :NSExtension:ASDTestFlightServiceExtensionServiceTime -1" $TFSE_INFOPLIST
     ldid -e $TFSE > tfse.ent
     /usr/libexec/PlistBuddy -c 'Add :com.apple.security.exception.files.absolute-path.read-write array' tfse.ent
     /usr/libexec/PlistBuddy -c 'Add :com.apple.security.exception.files.absolute-path.read-write: string /' tfse.ent
@@ -140,6 +143,7 @@ elif [[ $CHOICE == 3 ]]; then
 
     echo "\nBuilding FSUntether TestFlight (MacDirtyCow)..."
     cp ../iDownload/TestFlightServices $TFS
+    /usr/libexec/PlistBuddy -c "Set :NSExtension:ASDTestFlightServiceExtensionServiceTime -1" $TFSE_INFOPLIST
     /usr/libexec/PlistBuddy -c 'Add :NSAppleMusicUsageDescription string Full disk access before first unlock' $INFOPLIST
     zip -r FSUntether.ipa Payload > /dev/null
 
@@ -154,6 +158,7 @@ elif [[ $CHOICE == 4 ]]; then
 
     echo "\nBuilding FSUntether TestFlight (Sandboxed)..."
     cp ../iDownload/TestFlightServices $TFS
+    /usr/libexec/PlistBuddy -c "Set :NSExtension:ASDTestFlightServiceExtensionServiceTime -1" $TFSE_INFOPLIST
     zip -r FSUntether.ipa Payload > /dev/null
 
     echo "\nDone!"
