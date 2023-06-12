@@ -12,6 +12,7 @@
 1. Get decrypted TestFlight ipa
 2. Rename it to TestFlight.ipa and place it in the same directory as `build.sh`
 3. Build FSUntether with `build.sh` in the root of the repository.
+    * The script must be run with zsh. Just run `./build.sh` or `zsh build.sh`
 4. Install the built IPAs as instructed by `build.sh`
     * You'll need a paid certificate to retain the original `com.apple.TestFlight` bundle ID, if you're not using TrollStore.
     * FSUntether currently doesn't work if the bundle ID is changed.
