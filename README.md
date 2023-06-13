@@ -58,8 +58,6 @@
   * If the app is signed with an enterprise cert and the cert has not been trusted yet, it doesn't start at all. It can be started after trusting the cert, and it will start when the app is reinstalled or the device is rebooted.
 * Untether is not that fast. It usually starts 1-3 seconds before or after the Apple logo disappears.
 * If you're in Setup.app because of an update, it will not start before first unlock. It starts after unlocking and tapping the first button in Setup.app.
-* The injected code will become dormant a few minutes after starting. The port is still open and you can connect to it but iDownload won't respond. Nothing gets printed.
-* The code will completely stop more minutes later. The port is also closed and the connection will fail. (But `TestFlightServiceExtension` itself still runs.)
 * The process also randomly gets started in the background. I don't know the condition and timing.
 * Note: if iproxy prints `No connected device found` when the connection is failing, it means your device is not being properly detected. Please check if your device is not USB restricted (Settings → Passcode → Accessories must be ON), the cable is OK, or if some software like VMware is interfering with your connection.
 
