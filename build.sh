@@ -112,7 +112,6 @@ if [[ $CHOICE == 1 ]]; then
     
     echo "\nBuilding FSUntether TestFlight..."
     cp ../iDownload/TestFlightServices $TFS
-    /usr/libexec/PlistBuddy -c "Set :NSExtension:ASDTestFlightServiceExtensionServiceTime -1" $TFSE_INFOPLIST
     ldid -e $TFSE > tfse.ent
     /usr/libexec/PlistBuddy -c 'Add :com.apple.springboard.opensensitiveurl bool true' tfse.ent
     ldid -Stfse.ent -K../misc/dev_certificate.p12 $TFSE
