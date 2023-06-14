@@ -37,7 +37,7 @@
     * Supported versions: 15.0-15.4.1, 15.5b1-b4, 15.6b1-b5 (AFU supported on 14)
     * The code injected to `TestFlightServiceExtension` launches FSUntetherGUI with `SBSOpenSensitiveURLAndUnlock`. This works while locked because FSUntetherGUI is replacing the Magnifier app.
     * And FSUntetherGUI launches unsandboxed, standalone iDownload as root.
-    * This iDownload is completely unsandboxed. It can access all the files, execute binaries, kill processes, and so on. Also it isn't affected by the below lifecycle, running forever on the device.
+    * This iDownload is completely unsandboxed. It can access all the files, execute binaries, kill processes, and so on.
     * After launching iDownload, FSUntetherGUI will respring the device to get you back in the lock screen. See the [related comment](https://github.com/Ingan121/FSUntether/blob/756c69061d9eb661fe1612c7806902553f8dfb7e/FSUntetherGUI/FSUntetherGUI/FSUntetherGUIApp.swift#L30) for why.
     * FSUntetherGUI shows only a black screen when locked. I guess it has to do with the `com.apple.QuartzCore.secure-mode` entitlement (Magnifier, Camera, Notes, Calculator, etc. have it), but I don't know how to use it to get the app contents showing when locked.
 2. Semi-unsandboxed code execution with CVE-2022-26766 (permasigning)
@@ -56,9 +56,14 @@
 ## Some notes about the untether's lifecycle
 * `TestFlightServiceExtension` and the injected code start right after the app is installed.
   * If the app is signed with an enterprise cert and the cert has not been trusted yet, it doesn't start at all. It can be started after trusting the cert, and it will start when the app is reinstalled or the device is rebooted.
+  * This might be potentially abused for zero-click over trusted USB or one-click over Safari, on iOS 15 and below?
+  * Won't be possible with an ad-hoc cert on 16+ because of the new 'developer mode' requirement. Enterprise certs need the separate trust process anyway.
+  * And no, this isn't useful for iCloud bypasses. iOS blocks app installation over USB when it's activation locked, even without a passcode. Also no installation over the captive portal browser. Just tested this on my 14.3 Xs with the passcode and activation record removed.
 * Untether is not that fast. It usually starts 1-3 seconds before or after the Apple logo disappears.
 * If you're in Setup.app because of an update, it will not start before first unlock. It starts after unlocking and tapping the first button in Setup.app.
-* The process also randomly gets started in the background. I don't know the condition and timing.
+* Setting `ASDTestFlightServiceExtensionServiceTime` to `-1` in the `Info.plist` of `TestFlightServiceExtension` makes iDownload run forever. Without this, iDownload will stop three minutes after starting.
+  * Thanks to [@alfiecg24](https://github.com/alfiecg24) for finding this.
+* The process randomly gets restarted in the background when running without `ASDTestFlightServiceExtensionServiceTime`. I don't know the condition and timing.
 * Note: if iproxy prints `No connected device found` when the connection is failing, it means your device is not being properly detected. Please check if your device is not USB restricted (Settings → Passcode → Accessories must be ON), the cable is OK, or if some software like VMware is interfering with your connection.
 
 ## Todo
