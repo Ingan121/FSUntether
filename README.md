@@ -21,7 +21,7 @@
 * TestFlight app will crash on launch, but the untether will work fine.
 * Tested versions and devices:
   * iPhone Xs: 15.1, 15.4.1
-  * iPad Pro 12.9 6th gen: 16.1.1, 16.3.1, 16.4, 16.4.1, 16.5, 17.0DB1
+  * iPad Pro 12.9 6th gen: 16.1.1, 16.3.1, 16.4, 16.4.1, 16.5, 17.0DB1, 17.0DB2
   * iPhone 14 Pro Max: 16.1.2
   * On 14.3 (Xs), `TestFlightServiceExtension` starts a few seconds after the first unlock, so there's no BFU code execution. (But there are [Fugu14](https://github.com/LinusHenze/Fugu14) and [permasigning haxx](https://github.com/asdfugil/haxx) that work BFU on 14, you know.)
   * Versions below 13 are not tested. Note that the latest TestFlight requires iOS 14 or later. I don't even know if `TestFlightServiceExtension` exists on TestFlight for iOS 13 and below.
