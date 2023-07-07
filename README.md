@@ -7,7 +7,14 @@
                     by Ingan121
 ```
 *__Fucking Simple Untethered code execution PoC for iOS 15, 16, and 17__*
+* Patched in iOS 17.0 Developer Beta 3. See below for more details.
 # Compatibility is not guaranteed, USE AT YOUR OWN RISK!
+## The Patch
+* Since iOS 17.0DB3, `TestFlightServiceExtension` will not run at all if the TestFlight app is not a legitimate Apple-signed app.
+* Also, even with the legit TestFlight app, `TestFlightServiceExtension` will not run before the first unlock.
+* Legitimate `TestFlightServiceExtension` still autostarts after the first unlock or after the app install, though.
+* Installing a dev-signed ipa with the `com.apple.TestFlight` bundle ID is still allowed.
+
 ## Building
 1. Get decrypted TestFlight ipa
 2. Rename it to TestFlight.ipa and place it in the same directory as `build.sh`
@@ -50,7 +57,7 @@
     * This unsandbox also only has filesystem access and sensitive paths are unavailable either.
     * Run `grant_full_disk_access` in iDownload while unlocked to grant the required permissions and get full disk access. After first granting the permission, you can run this command while locked, too.
 4. Sandboxed code execution
-    * Supported versions: 15.0-17.0DB1 (AFU supported on 14)
+    * Supported versions: 15.0-17.0DB2 (AFU supported on 14)
     * No unsandboxing at all. Things like `ls /var` will fail.
 
 ## Some notes about the untether's lifecycle
