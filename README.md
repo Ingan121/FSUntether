@@ -14,6 +14,7 @@
 * Also, even with the legit TestFlight app, `TestFlightServiceExtension` will not run before the first unlock.
 * Legitimate `TestFlightServiceExtension` still autostarts after the first unlock or after the app install, though.
 * Installing a dev-signed ipa with the `com.apple.TestFlight` bundle ID is still allowed.
+* It still starts AFU + on app install if you install it with TrollStore. Tested on 17.0 14PM.
 
 ## Building
 1. Get decrypted TestFlight ipa
